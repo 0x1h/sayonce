@@ -1,3 +1,4 @@
+import { Text } from "@nextui-org/react";
 import styled from "styled-components";
 import tw from "twin.macro";
 
@@ -15,3 +16,16 @@ export const SNavbarLayout = styled.div`
     ${tw`bg-background`}
   }
 `;
+
+export const STextAuthorize = styled(Text)`
+  ${tw`flex items-center`}
+  svg {
+    ${tw`mr-2`}
+  }
+`
+
+STextAuthorize.defaultProps = {
+  b: true,
+  color: "inherit",
+
+}

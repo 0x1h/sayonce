@@ -13,12 +13,12 @@ const MyApp: AppType<{ session: Session | null }> = ({
   pageProps: { session, ...pageProps },
 }) => {
   return (
-    <Provider>
-      <SessionProvider session={session}>
+    <SessionProvider session={session}>
+      <Provider>
         <GlobalStyles />
         <Component {...pageProps} />
-      </SessionProvider>
-    </Provider>
+      </Provider>
+    </SessionProvider>
   );
 };
 

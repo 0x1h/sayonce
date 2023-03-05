@@ -6,9 +6,19 @@ import {
   Dropdown,
 } from "@nextui-org/react";
 import { collapseItems } from "./constant/collapseItems";
-import { SNavbarLayout } from "./SNavbar.styled";
+import { SNavbarLayout, STextAuthorize } from "./SNavbar.styled";
+import { FaDiscord } from "react-icons/fa";
+import { useSession, signIn } from "next-auth/react";
+import { useSSR } from "@nextui-org/react";
 
 export const Navbar = () => {
+  const { data: session,  } = useSession();
+  const { isBrowser } = useSSR();
+
+  if (!isBrowser) return null
+
+  console.log({ session });
+
   return (
     <SNavbarLayout>
       <NextNavbar
@@ -59,15 +69,15 @@ export const Navbar = () => {
               onAction={(actionKey) => console.log({ actionKey })}
             >
               <Dropdown.Item key="profile" css={{ height: "$18" }}>
-                <Text b color="inherit" css={{ d: "flex" }}>
-                  Signed in as
-                </Text>
-                <Text b color="inherit" css={{ d: "flex" }}>
-                  zoey@example.com
-                </Text>
-              </Dropdown.Item>
-              <Dropdown.Item key="logout" withDivider color="error">
-                Log Out
+                <STextAuthorize
+                  onClick={() => {
+                    // eslint-disable-next-line
+                    signIn("discord");
+                  }}
+                >
+                  <FaDiscord />
+                  Authorize with Discord
+                </STextAuthorize>
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
