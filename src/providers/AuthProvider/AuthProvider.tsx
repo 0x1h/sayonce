@@ -3,7 +3,7 @@ import type { Session } from "next-auth";
 import { isAuth } from "./utils/isAuth";
 
 type AuthProviderProps = {
-  session: Session;
+  session?: Session;
 };
 
 export const AuthProvider = ({

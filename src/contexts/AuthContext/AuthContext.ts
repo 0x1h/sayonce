@@ -8,7 +8,7 @@ export enum AUTH_STAGE_ENUM {
 
 export type AuthContextType = {
   authStage: AUTH_STAGE_ENUM;
-  session: Session
+  session?: Session
 };
 
 export const AuthContext = createContext<AuthContextType>({

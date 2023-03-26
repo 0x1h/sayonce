@@ -66,7 +66,7 @@ export const Navbar = () => {
         >
           <Dropdown placement="bottom-right">
             <Tooltip
-              content={session.user.name}
+              content={session?.user.name}
               placement="bottom"
               color={"primary"}
             >

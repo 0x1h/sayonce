@@ -5,7 +5,7 @@ import { AuthProvider } from "./AuthProvider/AuthProvider";
 import type { Session } from "next-auth";
 
 type ProviderProps = {
-  session: Session
+  session?: Session
 }
 
 
