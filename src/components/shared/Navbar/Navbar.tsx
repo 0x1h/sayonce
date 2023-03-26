@@ -4,6 +4,7 @@ import {
   Text,
   Avatar,
   Dropdown,
+  Tooltip,
 } from "@nextui-org/react";
 import { collapseItems } from "./constant/collapseItems";
 import { SNavbarLayout, STextAuthorize } from "./SNavbar.styled";
@@ -12,10 +13,12 @@ import { signIn, signOut } from "next-auth/react";
 import { useSSR } from "@nextui-org/react";
 import { useContext } from "react";
 import { AUTH_STAGE_ENUM, AuthContext } from "@/contexts/AuthContext";
+import { useRouter } from "next/router";
 
 export const Navbar = () => {
   const { isBrowser } = useSSR();
   const { authStage, session } = useContext(AuthContext);
+  const { pathname } = useRouter();
 
   if (!isBrowser) return null;
 
@@ -46,8 +49,12 @@ export const Navbar = () => {
           hideIn="xs"
           variant="highlight-rounded"
         >
-          <NextNavbar.Link>Posts</NextNavbar.Link>
-          <NextNavbar.Link isActive>Create</NextNavbar.Link>
+          <Link href={"/"}>
+            <NextNavbar.Link isActive={pathname === "/"}>Posts</NextNavbar.Link>
+          </Link>
+          <Link href={"/create"}>
+            <NextNavbar.Link isActive={pathname === "/create"}>Create</NextNavbar.Link>
+          </Link>
         </NextNavbar.Content>
         <NextNavbar.Content
           css={{
@@ -58,22 +65,24 @@ export const Navbar = () => {
           }}
         >
           <Dropdown placement="bottom-right">
-            <NextNavbar.Item>
-              <Dropdown.Trigger>
-                <Avatar
-                  bordered
-                  as="button"
-                  color="primary"
-                  size="md"
-                  src={session?.user?.image || ""}
-                />
-              </Dropdown.Trigger>
-            </NextNavbar.Item>
-            <Dropdown.Menu
-              aria-label="User menu actions"
-              color="primary"
-              // onAction={(actionKey) => {}}
+            <Tooltip
+              content={session.user.name}
+              placement="bottom"
+              color={"primary"}
             >
+              <NextNavbar.Item>
+                <Dropdown.Trigger>
+                  <Avatar
+                    bordered
+                    as="button"
+                    color="primary"
+                    size="md"
+                    src={session?.user?.image || ""}
+                  />
+                </Dropdown.Trigger>
+              </NextNavbar.Item>
+            </Tooltip>
+            <Dropdown.Menu aria-label="User menu actions" color="primary">
               {authStage === AUTH_STAGE_ENUM.UNAUTHORIZED ? (
                 <Dropdown.Item key="profile" css={{ height: "$18" }}>
                   <STextAuthorize
@@ -87,7 +96,11 @@ export const Navbar = () => {
                   </STextAuthorize>
                 </Dropdown.Item>
               ) : (
-                <Dropdown.Item key="profile" css={{ height: "$18" }} color="error">
+                <Dropdown.Item
+                  key="profile"
+                  css={{ height: "$18" }}
+                  color="error"
+                >
                   <STextAuthorize
                     color="error"
                     onClick={() => {

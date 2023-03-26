@@ -1,0 +1,1 @@
+export {EmojiSpam} from './EmojiSpam'

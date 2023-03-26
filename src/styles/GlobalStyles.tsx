@@ -38,6 +38,7 @@ const CustomStyles = createGlobalStyle({
   img: {
     pointerEvents: "none",
   }
+
 });
 
 const GlobalStyles = () => (
