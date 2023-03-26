@@ -26,6 +26,4 @@ export const STextAuthorize = styled(Text)`
 
 STextAuthorize.defaultProps = {
   b: true,
-  color: "inherit",
-
 }

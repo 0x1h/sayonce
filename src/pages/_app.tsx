@@ -8,13 +8,13 @@ import "@/styles/globals.css";
 import { Provider } from "@/providers";
 import GlobalStyles from "@/styles/GlobalStyles";
 
-const MyApp: AppType<{ session: Session | null }> = ({
+const MyApp: AppType<{ session: Session }> = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
   return (
     <SessionProvider session={session}>
-      <Provider>
+      <Provider session={session}>
         <GlobalStyles />
         <Component {...pageProps} />
       </Provider>
