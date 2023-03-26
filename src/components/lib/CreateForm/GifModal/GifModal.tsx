@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Modal, Input, Grid, Loading, Text } from "@nextui-org/react";
+import { type ChangeEvent, useState } from "react";
+import { Modal, Input, Loading, Text, type FormElement } from "@nextui-org/react";
 import Twemoji from "react-twemoji";
 import { SGifEmojiContainer, GSGridContainer } from "./SGifEmoji.styled";
 import debounce from "lodash/debounce";
@@ -12,8 +12,8 @@ type GifModalProps = {
 };
 
 export const GifModal = ({ openModal, setOpenModal }: GifModalProps) => {
-  const [search, setSearch] = useState("");
-  const { data, isLoading, error } = api.gif.useQuery({ search });
+  const [search, setSearch] = useState<string>("");
+  const { data, isLoading } = api.gif.useQuery({ search });
 
   if (!openModal) return null;
 
@@ -30,7 +30,11 @@ export const GifModal = ({ openModal, setOpenModal }: GifModalProps) => {
         <Input
           aria-labelledby="input"
           width="100%"
-          onChange={debounce((e) => setSearch(e.target.value), 500)}
+          onChange={debounce(
+            (e: ChangeEvent<FormElement>) =>
+              setSearch(e.target.value),
+            500
+          )}
           size="lg"
           bordered
           contentRight={isLoading && <Loading size="xs" color="white" />}
@@ -41,9 +45,7 @@ export const GifModal = ({ openModal, setOpenModal }: GifModalProps) => {
         {data?.gifs?.results?.length === 0 && !data?.gifs?.error && (
           <SGifEmojiContainer>
             <Twemoji>😶‍🌫️</Twemoji>
-            <Text b>
-              Ummm... Nothing found lol
-            </Text>
+            <Text b>Ummm... Nothing found lol</Text>
           </SGifEmojiContainer>
         )}
         {data?.gifs?.error && (
@@ -58,7 +60,11 @@ export const GifModal = ({ openModal, setOpenModal }: GifModalProps) => {
           {search &&
             (data?.gifs?.results?.length as number) > 0 &&
             data?.gifs?.results.map((post) => (
-              <GifCard img={post.media_formats.gif.url} title={post.title} />
+              <GifCard
+                key={post.id}
+                img={post.media_formats.gif.url}
+                title={post.title}
+              />
             ))}
         </GSGridContainer>
       </Modal.Body>

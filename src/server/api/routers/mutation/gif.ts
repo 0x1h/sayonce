@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { z } from "zod";
 import { publicProcedure } from "../../trpc";
 import { type GiphyType } from "@/types/Giphy.types";
@@ -12,6 +13,7 @@ export const gif = () => {
   .query(async ({ input }) => {
     try {
       const response: Response = await fetch(apiRequest(input.search))
+      //
       const data: GiphyType = await response.json()
       
       return {

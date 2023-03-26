@@ -1,4 +1,4 @@
-import Document, { Html, Head, Main, NextScript, DocumentContext, DocumentInitialProps } from "next/document";
+import Document, { Html, Head, Main, NextScript, type DocumentContext, type DocumentInitialProps } from "next/document";
 import { ServerStyleSheet } from "styled-components";
 import { Children } from "react";
 import { CssBaseline } from "@nextui-org/react";
@@ -24,13 +24,7 @@ export default class MyDocument extends Document {
           <>
             {initialProps.styles}
             {sheet.getStyleElement()}
-            {Children.toArray([<style jsx global>{`              
-              * {
-                padding: 0;
-                margin: 0;
-                box-sizing: border-box;
-              }
-            `}</style>])}
+            {Children.toArray([])}
             {CssBaseline.flush()}
           </>
         ),

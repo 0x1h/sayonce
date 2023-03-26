@@ -1,5 +1,5 @@
-import { AuthContext, AUTH_STAGE_ENUM } from "@/contexts/AuthContext";
-import { Session } from "next-auth";
+import { AuthContext } from "@/contexts/AuthContext";
+import type { Session } from "next-auth";
 import { isAuth } from "./utils/isAuth";
 
 type AuthProviderProps = {

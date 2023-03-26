@@ -1,5 +1,5 @@
-import { Session } from "next-auth";
-import { createContext, Dispatch, SetStateAction } from "react";
+import type { Session } from "next-auth";
+import { createContext } from "react";
 
 export enum AUTH_STAGE_ENUM {
   UNAUTHORIZED = "UNAUTHORIZED",

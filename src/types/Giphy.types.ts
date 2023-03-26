@@ -15,7 +15,6 @@ export interface Result {
   itemurl:             string;
   url:                 string;
   tags:                string[];
-  flags:               any[];
   hasaudio:            boolean;
 }
 

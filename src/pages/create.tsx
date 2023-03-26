@@ -1,8 +1,7 @@
-import { GetServerSidePropsContext, type NextPage } from "next";
+import type { GetServerSidePropsContext, NextPage } from "next";
 import { authOptions } from "@/server/api/auth";
 import { getServerSession } from "next-auth/next";
 import Head from "next/head";
-import { CreateForm } from "@/components/lib/CreateForm";
 import { Create } from "@/components/app/Create";
 
 const Home: NextPage = () => {
