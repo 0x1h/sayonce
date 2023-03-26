@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Modal, Input, Grid, Loading, Text } from "@nextui-org/react";
 import Twemoji from "react-twemoji";
-import { SGifEmojiContainer } from "./SGifEmoji.styled";
+import { SGifEmojiContainer, GSGridContainer } from "./SGifEmoji.styled";
 import debounce from "lodash/debounce";
 import { api } from "@/utils/api";
 import { GifCard } from "@/components/shared/GifCard/GifCard";
@@ -12,18 +12,15 @@ type GifModalProps = {
 };
 
 export const GifModal = ({ openModal, setOpenModal }: GifModalProps) => {
-  const [search, setSearch] = useState("random");
-  const { data, isLoading } = api.gif.useQuery({ search });
+  const [search, setSearch] = useState("");
+  const { data, isLoading, error } = api.gif.useQuery({ search });
 
-  
-  
   if (!openModal) return null;
-  
-  console.log(data?.gifs);
 
   return (
     <Modal
       blur
+      scroll
       aria-labelledby="modal-title"
       open={openModal}
       onClose={() => setOpenModal()}
@@ -41,7 +38,15 @@ export const GifModal = ({ openModal, setOpenModal }: GifModalProps) => {
         />
       </Modal.Header>
       <Modal.Body>
-        {!search.trim() && data?.gifs?.results?.length === 0 && (
+        {data?.gifs?.results?.length === 0 && !data?.gifs?.error && (
+          <SGifEmojiContainer>
+            <Twemoji>😶‍🌫️</Twemoji>
+            <Text b>
+              Ummm... Nothing found lol
+            </Text>
+          </SGifEmojiContainer>
+        )}
+        {data?.gifs?.error && (
           <SGifEmojiContainer>
             <Twemoji>🧐</Twemoji>
             <Text b>
@@ -49,17 +54,13 @@ export const GifModal = ({ openModal, setOpenModal }: GifModalProps) => {
             </Text>
           </SGifEmojiContainer>
         )}
-        <Grid.Container gap={2} justify="flex-start">
-          {search && data?.gifs?.results?.length as number > 0 && (
-            <Grid.Container gap={2} justify="flex-start">
-              {data?.gifs.results.map((post) => (
-                <Grid xs={12} sm={6} key={post.id}>
-                  <GifCard img={post.media_formats.gif.url} title={post.title}/>
-                </Grid>
-              ))}
-            </Grid.Container>
-          )}
-        </Grid.Container>
+        <GSGridContainer>
+          {search &&
+            (data?.gifs?.results?.length as number) > 0 &&
+            data?.gifs?.results.map((post) => (
+              <GifCard img={post.media_formats.gif.url} title={post.title} />
+            ))}
+        </GSGridContainer>
       </Modal.Body>
     </Modal>
   );

@@ -3,7 +3,7 @@ import { publicProcedure } from "../../trpc";
 import { type GiphyType } from "@/types/Giphy.types";
 
 export const apiRequest = (search: string) => {  
-  return `https://tenor.googleapis.com/v2/search?q=${search}&key=${process.env.NEXT_GIPHY_API_KEY}&limit=8&media_filter=gif`
+  return `https://tenor.googleapis.com/v2/search?q=${search}&key=${process.env.NEXT_GIPHY_API_KEY}&limit=18&media_filter=gif`
 }
 
 export const gif = () => {
@@ -18,7 +18,7 @@ export const gif = () => {
         gifs: data
       };
     }catch(err){
-        console.log(err);
+      return {error: err}
     }
   })
 }

@@ -12,6 +12,7 @@ export const SCreateWrapper = styled.div`
     }
 `
 
+
 export const SCardWrapper = styled.div`
     ${tw`mt-3`}
     button {

@@ -7,3 +7,12 @@ export const SGifEmojiContainer = styled.div`
     ${tw`max-w-[300px] mt-4`}
   }
 `
+
+export const GSGridContainer = styled.div`
+    ${tw`grid gap-3`}
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+`
+
+export const SGridPhoto = styled.div`
+  ${tw`w-full flex items-center justify-center overflow-hidden rounded-xl`}
+`

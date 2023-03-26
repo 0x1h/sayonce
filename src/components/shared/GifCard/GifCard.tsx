@@ -9,19 +9,13 @@ export const GifCard = ({ img, title }: GifCardProps) => {
   return (
     <Card
       isPressable
-      style={{
-        display: "table",
-        overflow:'auto' 
-      }}
     >
       <Card.Image
-        style={{
-          display: "table-row",
-        }}
         src={img}
         objectFit="cover"
-        // width="100%"
+        width={'100%'}
         alt={title}
+        height={'100%'}
       />
     </Card>
   );

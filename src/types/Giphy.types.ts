@@ -1,6 +1,9 @@
 export interface GiphyType {
   results: Result[];
   next:    string;
+  error?: {
+    code: number 
+  }
 }
 
 export interface Result {
