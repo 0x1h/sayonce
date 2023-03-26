@@ -72,7 +72,7 @@ export const Navbar = () => {
             <Dropdown.Menu
               aria-label="User menu actions"
               color="primary"
-              onAction={(actionKey) => {}}
+              // onAction={(actionKey) => {}}
             >
               {authStage === AUTH_STAGE_ENUM.UNAUTHORIZED ? (
                 <Dropdown.Item key="profile" css={{ height: "$18" }}>
