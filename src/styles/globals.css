@@ -1,6 +1,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  background: #000;
+}
+
 ::-webkit-scrollbar {
     width: 5px;
   }
