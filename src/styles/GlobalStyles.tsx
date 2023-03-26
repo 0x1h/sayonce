@@ -6,7 +6,6 @@ const CustomStyles = createGlobalStyle({
     scrollBehavior: "smooth",
   },
   body: {
-    background: "#181818",
     minHeight: "100vh",
     color: "#FFF",
   },

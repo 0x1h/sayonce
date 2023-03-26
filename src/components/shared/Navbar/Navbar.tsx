@@ -39,9 +39,11 @@ export const Navbar = () => {
             },
           }}
         >
-          <Text b color="inherit" hideIn="xs">
-            Sayonce
-          </Text>
+          <Link href="/">
+            <Text b color="inherit" hideIn="xs">
+              Sayonce
+            </Text>
+          </Link>
         </NextNavbar.Brand>
         <NextNavbar.Content
           enableCursorHighlight
@@ -53,7 +55,9 @@ export const Navbar = () => {
             <NextNavbar.Link isActive={pathname === "/"}>Posts</NextNavbar.Link>
           </Link>
           <Link href={"/create"}>
-            <NextNavbar.Link isActive={pathname === "/create"}>Create</NextNavbar.Link>
+            <NextNavbar.Link isActive={pathname === "/create"}>
+              Create
+            </NextNavbar.Link>
           </Link>
         </NextNavbar.Content>
         <NextNavbar.Content
