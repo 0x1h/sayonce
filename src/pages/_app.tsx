@@ -8,17 +8,17 @@ import "@/styles/globals.css";
 import { Provider } from "@/providers";
 import GlobalStyles from "@/styles/GlobalStyles";
 
-const MyApp: AppType<{ session: Session | null }> = ({
+const MyApp: AppType<{ session: Session }> = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
   return (
-    <Provider>
-      <SessionProvider session={session}>
+    <SessionProvider session={session}>
+      <Provider session={session}>
         <GlobalStyles />
         <Component {...pageProps} />
-      </SessionProvider>
-    </Provider>
+      </Provider>
+    </SessionProvider>
   );
 };
 

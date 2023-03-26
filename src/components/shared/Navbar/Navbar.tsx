@@ -6,9 +6,19 @@ import {
   Dropdown,
 } from "@nextui-org/react";
 import { collapseItems } from "./constant/collapseItems";
-import { SNavbarLayout } from "./SNavbar.styled";
+import { SNavbarLayout, STextAuthorize } from "./SNavbar.styled";
+import { FaDiscord } from "react-icons/fa";
+import { signIn, signOut } from "next-auth/react";
+import { useSSR } from "@nextui-org/react";
+import { useContext } from "react";
+import { AUTH_STAGE_ENUM, AuthContext } from "@/contexts/AuthContext";
 
 export const Navbar = () => {
+  const { isBrowser } = useSSR();
+  const { authStage, session } = useContext(AuthContext);
+
+  if (!isBrowser) return null;
+
   return (
     <SNavbarLayout>
       <NextNavbar
@@ -50,25 +60,45 @@ export const Navbar = () => {
           <Dropdown placement="bottom-right">
             <NextNavbar.Item>
               <Dropdown.Trigger>
-                <Avatar bordered as="button" color="primary" size="md" />
+                <Avatar
+                  bordered
+                  as="button"
+                  color="primary"
+                  size="md"
+                  src={session?.user?.image || ""}
+                />
               </Dropdown.Trigger>
             </NextNavbar.Item>
             <Dropdown.Menu
               aria-label="User menu actions"
               color="primary"
-              onAction={(actionKey) => console.log({ actionKey })}
+              onAction={(actionKey) => {}}
             >
-              <Dropdown.Item key="profile" css={{ height: "$18" }}>
-                <Text b color="inherit" css={{ d: "flex" }}>
-                  Signed in as
-                </Text>
-                <Text b color="inherit" css={{ d: "flex" }}>
-                  zoey@example.com
-                </Text>
-              </Dropdown.Item>
-              <Dropdown.Item key="logout" withDivider color="error">
-                Log Out
-              </Dropdown.Item>
+              {authStage === AUTH_STAGE_ENUM.UNAUTHORIZED ? (
+                <Dropdown.Item key="profile" css={{ height: "$18" }}>
+                  <STextAuthorize
+                    onClick={() => {
+                      // eslint-disable-next-line
+                      signIn("discord");
+                    }}
+                  >
+                    <FaDiscord />
+                    Authorize with Discord
+                  </STextAuthorize>
+                </Dropdown.Item>
+              ) : (
+                <Dropdown.Item key="profile" css={{ height: "$18" }} color="error">
+                  <STextAuthorize
+                    color="error"
+                    onClick={() => {
+                      // eslint-disable-next-line
+                      signOut();
+                    }}
+                  >
+                    Log out
+                  </STextAuthorize>
+                </Dropdown.Item>
+              )}
             </Dropdown.Menu>
           </Dropdown>
         </NextNavbar.Content>

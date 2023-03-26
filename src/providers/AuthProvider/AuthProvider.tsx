@@ -1,14 +1,20 @@
 import { AuthContext, AUTH_STAGE_ENUM } from "@/contexts/AuthContext";
-import { useFetchUser } from "./hooks/useFetchUser";
+import { Session } from "next-auth";
+import { isAuth } from "./utils/isAuth";
 
-export const AuthProvider = ({ children }: React.PropsWithChildren) => {
-  const {} = useFetchUser();
+type AuthProviderProps = {
+  session: Session;
+};
 
+export const AuthProvider = ({
+  children,
+  session,
+}: React.PropsWithChildren<AuthProviderProps>) => {  
   return (
     <AuthContext.Provider
       value={{
-        authStage: AUTH_STAGE_ENUM.UNAUTHORIZED,
-        clientId: "",
+        authStage: isAuth(session),
+        session,
       }}
     >
       {children}

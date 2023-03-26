@@ -1,18 +1,22 @@
+import { Session } from "next-auth";
 import { createContext, Dispatch, SetStateAction } from "react";
 
 export enum AUTH_STAGE_ENUM {
   UNAUTHORIZED = "UNAUTHORIZED",
   AUTHORIZED = "AUTHORIZED",
-  PENDING = "PENDING",
 }
 
-type AuthContextType = {
+export type AuthContextType = {
   authStage: AUTH_STAGE_ENUM;
-  clientId: string;
-  setClientId?: Dispatch<SetStateAction<string>>;
+  session: Session
 };
 
 export const AuthContext = createContext<AuthContextType>({
   authStage: AUTH_STAGE_ENUM.UNAUTHORIZED,
-  clientId: "",
+  session: {
+    expires: "",
+    user: {
+      id: ""
+    }
+  } 
 });

@@ -1,12 +1,21 @@
 import { Navbar } from "@/components/shared/Navbar";
 import { GlobalModals } from "./GlobalModalsProvider";
 import { NextUi } from "./NextUiProvider";
+import { AuthProvider } from "./AuthProvider/AuthProvider";
+import { Session } from "next-auth";
 
-export const Provider = ({ children }: React.PropsWithChildren) => {
+type ProviderProps = {
+  session: Session
+}
+
+
+export const Provider = ({ children, session }: React.PropsWithChildren<ProviderProps>) => {
   return (
-    <NextUi>
-      <Navbar />
-      <GlobalModals>{children}</GlobalModals>
-    </NextUi>
+    <AuthProvider session={session}>
+      <NextUi>
+        <Navbar />
+        <GlobalModals>{children}</GlobalModals>
+      </NextUi>
+    </AuthProvider>
   );
 };
