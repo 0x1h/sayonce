@@ -8,7 +8,7 @@ const config = {
     defaultLocale: "en",
   },
   images: {
-    domains: ['i.kym-cdn.com', 'media2.giphy.com'],
+    domains: ['i.kym-cdn.com', 'media2.giphy.com', 'media.tenor.com'],
   },
 };
 export default config;

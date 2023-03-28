@@ -4,19 +4,14 @@ import Twemoji from "react-twemoji";
 import { emojis } from "./constant";
 
 export const EmojiSpam: React.FC = () => {
-  const [emoji, setEmoji] = useState<string>("🦄");
+  const [emoji, setEmoji] = useState<string>("");
 
-  const intervalFunction = useCallback(() => {
+  useEffect(() => {
     const randomEmoji: string = emojis[
       Math.floor(Math.random() * emojis.length)
     ] as string;
     setEmoji(randomEmoji);
-  }, [setEmoji]);
-
-  useEffect(() => {
-    const interval = setInterval(intervalFunction, 500);
-    return () => clearInterval(interval);
-  }, [intervalFunction]);
+  }, []);
 
   return (
     <SEmojiSpam>

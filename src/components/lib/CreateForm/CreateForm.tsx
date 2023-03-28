@@ -1,5 +1,13 @@
 import { PaddedWrapper } from "@/components/shared/PaddedWrapper";
-import { Button, Card, Input, Text, Textarea } from "@nextui-org/react";
+import {
+  Button,
+  Card,
+  FormElement,
+  Image,
+  Input,
+  Text,
+  Textarea,
+} from "@nextui-org/react";
 import {
   SCreateWrapper,
   SCreateForm,
@@ -7,54 +15,98 @@ import {
   STextCenter,
 } from "./SCreateForm.styled";
 import { EmojiSpam } from "@/components/shared/EmojiSpam/EmojiSpam";
-import { useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { GifModal } from "./GifModal/GifModal";
+import { values } from "./template";
+import { useValidate } from "./hooks/useValidate";
+import { ConfirmModal } from "./ConfirmModal";
 
 export const CreateForm = () => {
+  const [formValues, setFormValues] = useState(values);
+  const [submited, setSubmited] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [openConfirmModal, setOpenConfirmModal] = useState(false)
+  const { errors } = useValidate(formValues);
+
+  const inputHandler = (e: ChangeEvent<FormElement>) => {
+    const { value, name } = e.target;
+
+    setFormValues((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const submitHandler = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSubmited(true);
+
+    if (Object.keys(errors).length > 0) return
+
+    setOpenConfirmModal(true)
+  };
 
   return (
     <PaddedWrapper>
+      <ConfirmModal openModal={openConfirmModal} setOpenModal={() => setOpenConfirmModal(false)}/>
       <GifModal
+        setGif={(gif) => {
+          setFormValues((prev) => ({ ...prev, gif }));
+          setOpenModal(false);
+        }}
         openModal={openModal}
         setOpenModal={() => setOpenModal(false)}
       />
-      <SCreateForm>
+      <SCreateForm onSubmit={submitHandler}>
         <SCreateWrapper>
           <Input
             size="xl"
             label="Title"
-            required
+            name="title"
+            onChange={inputHandler}
             width="100%"
             aria-labelledby="search"
+            status={errors.title && submited ? "error" : "default"}
+            helperText={errors.title && submited ? errors.title : ""}
           />
           <Textarea
             size="xl"
+            onChange={inputHandler}
+            name="description"
             label="Description"
-            required
+            status={errors.description && submited ? "error" : "default"}
             width="100%"
             aria-labelledby="description"
+            helperText={
+              errors.description && submited ? errors.description : ""
+            }
           />
-          <SCardWrapper>
-            <Text b>Gif</Text>
+          <SCardWrapper error={!!(errors.gif && submited)}>
+            <Text b color={errors.gif && submited ? "error" : undefined}>
+              Gif
+            </Text>
             <Card
               onPress={() => setOpenModal(true)}
               isPressable
+              className="gif-card"
               aria-labelledby="card"
               style={{
                 padding: "24px",
               }}
             >
-              <EmojiSpam />
-              <STextCenter>
-                <Text size={"$2xl"} b>
-                  Search GIF
-                </Text>
-              </STextCenter>
+              {formValues?.gif ? (
+                <Image src={formValues.gif} style={{ borderRadius: "10px" }} />
+              ) : (
+                <>
+                  <EmojiSpam />
+                  <STextCenter>
+                    <Text size={"$2xl"} b>
+                      Search GIF
+                    </Text>
+                  </STextCenter>
+                </>
+              )}
             </Card>
           </SCardWrapper>
           <SCardWrapper>
-            <Button flat size="xl" color="success" disabled>
+            <Button flat size="xl" color="success" type="submit">
               Post ✨
             </Button>
           </SCardWrapper>

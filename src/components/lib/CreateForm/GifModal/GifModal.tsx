@@ -1,5 +1,11 @@
 import { type ChangeEvent, useState } from "react";
-import { Modal, Input, Loading, Text, type FormElement } from "@nextui-org/react";
+import {
+  Modal,
+  Input,
+  Loading,
+  Text,
+  type FormElement,
+} from "@nextui-org/react";
 import Twemoji from "react-twemoji";
 import { SGifEmojiContainer, GSGridContainer } from "./SGifEmoji.styled";
 import debounce from "lodash/debounce";
@@ -9,13 +15,16 @@ import { GifCard } from "@/components/shared/GifCard/GifCard";
 type GifModalProps = {
   openModal: boolean;
   setOpenModal: () => void;
+  setGif: (gif: string) => void;
 };
 
-export const GifModal = ({ openModal, setOpenModal }: GifModalProps) => {
+export const GifModal = ({
+  openModal,
+  setOpenModal,
+  setGif,
+}: GifModalProps) => {
   const [search, setSearch] = useState<string>("");
   const { data, isLoading } = api.gif.useQuery({ search });
-
-  if (!openModal) return null;
 
   return (
     <Modal
@@ -30,9 +39,9 @@ export const GifModal = ({ openModal, setOpenModal }: GifModalProps) => {
         <Input
           aria-labelledby="input"
           width="100%"
+          autoFocus
           onChange={debounce(
-            (e: ChangeEvent<FormElement>) =>
-              setSearch(e.target.value),
+            (e: ChangeEvent<FormElement>) => setSearch(e.target.value),
             500
           )}
           size="lg"
@@ -61,6 +70,7 @@ export const GifModal = ({ openModal, setOpenModal }: GifModalProps) => {
             (data?.gifs?.results?.length as number) > 0 &&
             data?.gifs?.results.map((post) => (
               <GifCard
+                onClick={setGif}
                 key={post.id}
                 img={post.media_formats.gif.url}
                 title={post.title}
