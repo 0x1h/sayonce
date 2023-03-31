@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { SEmojiSpam } from "./SEmojiSpam.styled";
 import Twemoji from "react-twemoji";
 import { emojis } from "./constant";

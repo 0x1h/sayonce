@@ -15,11 +15,13 @@ import {
   STextCenter,
 } from "./SCreateForm.styled";
 import { EmojiSpam } from "@/components/shared/EmojiSpam/EmojiSpam";
-import { ChangeEvent, FormEvent, useState } from "react";
-import { GifModal } from "./GifModal/GifModal";
+import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
+import { GifModal } from "./modals/GifModal/GifModal";
 import { values } from "./template";
 import { useValidate } from "./hooks/useValidate";
-import { ConfirmModal } from "./ConfirmModal";
+import { ConfirmModal } from "./modals/ConfirmModal";
+import { AuthModal } from "./modals/AuthModal";
+import { AUTH_STAGE_ENUM, AuthContext } from "@/contexts/AuthContext";
 
 export const CreateForm = () => {
   const [formValues, setFormValues] = useState(values);
@@ -27,6 +29,11 @@ export const CreateForm = () => {
   const [openModal, setOpenModal] = useState(false);
   const [openConfirmModal, setOpenConfirmModal] = useState(false)
   const { errors } = useValidate(formValues);
+  const {authStage} = useContext(AuthContext)
+
+  useEffect(() => {
+      document.body.style.overflow = "visible"
+  }, [openConfirmModal, openModal])
 
   const inputHandler = (e: ChangeEvent<FormElement>) => {
     const { value, name } = e.target;
@@ -42,6 +49,10 @@ export const CreateForm = () => {
 
     setOpenConfirmModal(true)
   };
+
+  if(authStage === AUTH_STAGE_ENUM.UNAUTHORIZED) {
+    return <AuthModal />
+  }
 
   return (
     <PaddedWrapper>
