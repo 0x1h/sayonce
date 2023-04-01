@@ -7,11 +7,12 @@ export type PostCard = {
   title: string;
   avatar?: string;
   username?: string;
+  onPress?: () => void
 };
 
-export const PostCard = ({ title, img, username, avatar }: PostCard) => {
+export const PostCard = ({ title, img, username, avatar, onPress }: PostCard) => {
   return (
-    <Card isPressable>
+    <Card isPressable onPress={onPress}>
       <Card.Body css={{ p: 0 }}>
         <SPostCard>
           <Image

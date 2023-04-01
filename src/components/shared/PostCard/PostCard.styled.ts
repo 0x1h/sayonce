@@ -7,7 +7,5 @@ export const SPostCard = styled.div`
 `
 
 export const SText = styled(Text)`
-    ${tw`w-full overflow-hidden`}
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    ${tw`overflow-hidden text-ellipsis whitespace-nowrap`}
 `

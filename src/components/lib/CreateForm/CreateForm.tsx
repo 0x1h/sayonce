@@ -96,14 +96,11 @@ export const CreateForm = () => {
             <Card
               onPress={() => setOpenModal(true)}
               isPressable
-              className="gif-card"
+              className="gif-card p-8"
               aria-labelledby="card"
-              style={{
-                padding: "24px",
-              }}
             >
               {formValues?.gif ? (
-                <Image src={formValues.gif} style={{ borderRadius: "10px" }} />
+                <Image src={formValues.gif} className="rounded-2xl" />
               ) : (
                 <>
                   <EmojiSpam />

@@ -1,0 +1,1 @@
+export { PostArticle } from "./PostArticle";
