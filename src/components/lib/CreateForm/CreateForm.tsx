@@ -27,13 +27,13 @@ export const CreateForm = () => {
   const [formValues, setFormValues] = useState(values);
   const [submited, setSubmited] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-  const [openConfirmModal, setOpenConfirmModal] = useState(false)
+  const [openConfirmModal, setOpenConfirmModal] = useState(false);
   const { errors } = useValidate(formValues);
-  const {authStage} = useContext(AuthContext)
+  const { authStage } = useContext(AuthContext);
 
   useEffect(() => {
-      document.body.style.overflow = "visible"
-  }, [openConfirmModal, openModal])
+    document.body.style.overflow = "visible";
+  }, [openConfirmModal, openModal]);
 
   const inputHandler = (e: ChangeEvent<FormElement>) => {
     const { value, name } = e.target;
@@ -45,18 +45,21 @@ export const CreateForm = () => {
     e.preventDefault();
     setSubmited(true);
 
-    if (Object.keys(errors).length > 0) return
+    if (Object.keys(errors).length > 0) return;
 
-    setOpenConfirmModal(true)
+    setOpenConfirmModal(true);
   };
 
-  if(authStage === AUTH_STAGE_ENUM.UNAUTHORIZED) {
-    return <AuthModal />
+  if (authStage === AUTH_STAGE_ENUM.UNAUTHORIZED) {
+    return <AuthModal />;
   }
 
   return (
     <PaddedWrapper>
-      <ConfirmModal openModal={openConfirmModal} setOpenModal={() => setOpenConfirmModal(false)}/>
+      <ConfirmModal
+        openModal={openConfirmModal}
+        setOpenModal={() => setOpenConfirmModal(false)}
+      />
       <GifModal
         setGif={(gif) => {
           setFormValues((prev) => ({ ...prev, gif }));
@@ -100,7 +103,7 @@ export const CreateForm = () => {
               aria-labelledby="card"
             >
               {formValues?.gif ? (
-                <Image src={formValues.gif} className="rounded-2xl" />
+                <Image src={formValues.gif} className="rounded-2xl" alt="content gif"/>
               ) : (
                 <>
                   <EmojiSpam />

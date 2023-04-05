@@ -16,11 +16,13 @@
  */
 import { type CreateNextContextOptions } from "@trpc/server/adapters/next";
 import { type Session } from "next-auth";
+import { prisma } from "@/server/db";
 
 import { getServerAuthSession } from "@/server/api/auth";
 
 type CreateContextOptions = {
   session: Session | null;
+  ip: string | undefined;
 };
 
 /**
@@ -36,6 +38,8 @@ type CreateContextOptions = {
 const createInnerTRPCContext = (opts: CreateContextOptions) => {
   return {
     session: opts.session,
+    prisma,
+    ip: opts.ip,
   };
 };
 
@@ -53,6 +57,7 @@ export const createTRPCContext = async (opts: CreateNextContextOptions) => {
 
   return createInnerTRPCContext({
     session,
+    ip: req.socket.remoteAddress,
   });
 };
 

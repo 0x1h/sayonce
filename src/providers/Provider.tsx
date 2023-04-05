@@ -5,11 +5,13 @@ import { AuthProvider } from "./AuthProvider/AuthProvider";
 import type { Session } from "next-auth";
 
 type ProviderProps = {
-  session?: Session
-}
+  session?: Session;
+};
 
-
-export const Provider = ({ children, session }: React.PropsWithChildren<ProviderProps>) => {
+export const Provider = ({
+  children,
+  session,
+}: React.PropsWithChildren<ProviderProps>) => {
   return (
     <AuthProvider session={session}>
       <NextUi>

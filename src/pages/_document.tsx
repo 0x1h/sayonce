@@ -4,7 +4,7 @@ import Document, {
   Head,
   Main,
   NextScript,
-  DocumentContext,
+  type DocumentContext,
 } from "next/document";
 import { CssBaseline } from "@nextui-org/react";
 import { ServerStyleSheet } from "styled-components";
