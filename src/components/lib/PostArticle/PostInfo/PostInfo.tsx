@@ -6,17 +6,22 @@ import {
   SPostInfoTitle,
 } from "./SPostInfo.styled";
 import { Tooltip } from "@nextui-org/react";
+import { PostProps } from "@/pages/post/[id]";
 
-export const PostInfo = () => {
+export const PostInfo = ({
+  createdAt,
+  description,
+  title,
+}: PostProps["post"]) => {
   return (
     <SPostInfo>
-      <SPostInfoTitle>Slaying everydayy ✨</SPostInfoTitle>
-      <SPostInfoDescription>Lorem Ipsum is simply</SPostInfoDescription>
+      <SPostInfoTitle>{title}</SPostInfoTitle>
+      <SPostInfoDescription>{description}</SPostInfoDescription>
       <Tooltip
         color="primary"
-        content={dayjs(new Date()).format("D MMMM, YYYY h:mm A")}
+        content={dayjs(createdAt).format("D MMMM, YYYY h:mm A")}
       >
-        <SPostDate dateTime="">{dayjs(new Date()).fromNow()}</SPostDate>
+        <SPostDate dateTime="">{dayjs(createdAt).fromNow()}</SPostDate>
       </Tooltip>
     </SPostInfo>
   );

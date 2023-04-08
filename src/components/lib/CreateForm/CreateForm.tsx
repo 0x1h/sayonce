@@ -31,6 +31,8 @@ export const CreateForm = () => {
   const { errors } = useValidate(formValues);
   const { authStage } = useContext(AuthContext);
 
+  console.log({ formValues });
+
   useEffect(() => {
     document.body.style.overflow = "visible";
   }, [openConfirmModal, openModal]);
@@ -57,6 +59,7 @@ export const CreateForm = () => {
   return (
     <PaddedWrapper>
       <ConfirmModal
+        form={formValues}
         openModal={openConfirmModal}
         setOpenModal={() => setOpenConfirmModal(false)}
       />
@@ -103,7 +106,11 @@ export const CreateForm = () => {
               aria-labelledby="card"
             >
               {formValues?.gif ? (
-                <Image src={formValues.gif} className="rounded-2xl" alt="content gif"/>
+                <Image
+                  src={formValues.gif}
+                  className="rounded-2xl"
+                  alt="content gif"
+                />
               ) : (
                 <>
                   <EmojiSpam />

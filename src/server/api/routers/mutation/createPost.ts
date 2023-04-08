@@ -3,7 +3,7 @@ import { publicProcedure } from "../../trpc";
 import { alreadyPost } from "../../middleware/alreadyPost";
 import { TRPCError } from "@trpc/server";
 
-export const authUser = () => {
+export const createPost = () => {
   return publicProcedure
     .use(alreadyPost)
     .input(

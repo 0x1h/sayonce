@@ -35,9 +35,7 @@ export const authUser = () => {
             id: input.client_id,
           },
           data: {
-            avatar: input.avatar,
-            ip: ctx.ip as string,
-            username: input.username,
+            avatar: input.avatar
           },
         });
       }
