@@ -22,6 +22,7 @@ import { useValidate } from "./hooks/useValidate";
 import { ConfirmModal } from "./modals/ConfirmModal";
 import { AuthModal } from "./modals/AuthModal";
 import { AUTH_STAGE_ENUM, AuthContext } from "@/contexts/AuthContext";
+import { SuccessModal } from "./modals/SuccessModal";
 
 export const CreateForm = () => {
   const [formValues, setFormValues] = useState(values);
@@ -30,8 +31,7 @@ export const CreateForm = () => {
   const [openConfirmModal, setOpenConfirmModal] = useState(false);
   const { errors } = useValidate(formValues);
   const { authStage } = useContext(AuthContext);
-
-  console.log({ formValues });
+  const [success, setSuccess] = useState(false);
 
   useEffect(() => {
     document.body.style.overflow = "visible";
@@ -56,9 +56,14 @@ export const CreateForm = () => {
     return <AuthModal />;
   }
 
+  if (success) {
+    return <SuccessModal />;
+  }
+
   return (
     <PaddedWrapper>
       <ConfirmModal
+        setSuccess={() => setSuccess(true)}
         form={formValues}
         openModal={openConfirmModal}
         setOpenModal={() => setOpenConfirmModal(false)}
@@ -90,6 +95,7 @@ export const CreateForm = () => {
             label="Description"
             status={errors.description && submited ? "error" : "default"}
             width="100%"
+            maxLength={500}
             aria-labelledby="description"
             helperText={
               errors.description && submited ? errors.description : ""

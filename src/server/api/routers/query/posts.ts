@@ -7,11 +7,12 @@ export const posts = () => {
     .input(z.object({ page: z.number(), limit: z.number() }))
     .query(async ({ input, ctx }) => {
       const posts = await ctx.prisma.post.findMany({
-        skip: input.page * 10,
+        skip: Number(input.page) * 10,
         take: input.limit,
+        orderBy: { createdAt: "desc" },
         include: {
-          author: true
-        }
+          author: true,
+        },
       });
 
       return {
@@ -21,8 +22,8 @@ export const posts = () => {
           gif: post.gif,
           title: post.title,
           author: {
-            avatar: post.author.avatar
-          }
+            avatar: post.author.avatar,
+          },
         })),
       };
     });

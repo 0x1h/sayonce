@@ -13,7 +13,7 @@ export const SNavbarLayout = styled.div`
     }
   }
   .nextui-navbar-collapse {
-    ${tw`bg-background`}
+    ${tw`bg-[#000]`}
   }
 `;
 

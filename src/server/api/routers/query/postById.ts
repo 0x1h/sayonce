@@ -5,7 +5,7 @@ import { publicProcedure } from "../../trpc";
 
 export const postById = () => {
   return publicProcedure
-    .input(z.object({ id: z.string() }))
+    .input(z.object({ id: z.number() }))
     .query(async ({ input, ctx }) => {
       const post = await ctx.prisma.post.findUnique({
         where: {

@@ -14,12 +14,14 @@ type GifModalProps = {
   openModal: boolean;
   setOpenModal: () => void;
   form: typeof values;
+  setSuccess: () => void;
 };
 
 export const ConfirmModal = ({
   openModal,
   setOpenModal,
   form,
+  setSuccess,
 }: GifModalProps) => {
   const createPost = api.createPost.useMutation();
   const { session } = useContext(AuthContext);
@@ -27,10 +29,17 @@ export const ConfirmModal = ({
   if (!openModal) return null;
 
   const submitPostCreate = () => {
-    createPost.mutate({
-      client_id: session?.user.id as string,
-      ...form,
-    });
+    createPost.mutate(
+      {
+        client_id: session?.user.id as string,
+        ...form,
+      },
+      {
+        onSuccess: () => {
+          setSuccess();
+        },
+      }
+    );
   };
 
   return (

@@ -19,7 +19,7 @@ export const createPost = () => {
         await ctx.prisma.post.create({
           data: {
             gif: input.gif,
-            description: input.gif,
+            description: input.description,
             title: input.title,
             userId: input.client_id,
           },
@@ -29,9 +29,10 @@ export const createPost = () => {
           success: true,
           message: "post created",
         };
-      } catch {
+      } catch (error){
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
+          message: JSON.stringify(error)
         });
       }
     });

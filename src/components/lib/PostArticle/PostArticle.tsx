@@ -9,7 +9,7 @@ export const PostArticle = (post: PostProps["post"]) => {
     <PaddedWrapper>
       <SPostArticle>
         <PostInfo {...post} />
-        <ProfileCard />
+        <ProfileCard {...post} />
       </SPostArticle>
     </PaddedWrapper>
   );

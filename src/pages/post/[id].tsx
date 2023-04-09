@@ -15,13 +15,11 @@ export type PostProps = {
 };
 
 export const PostPage: NextPage<PostProps> = ({ post }) => {
-  console.log({ post });
-
   return (
     <>
       <Head>
-        <title>{post.title}</title>
-        <meta title="description" content={post.description} />
+        <title>{post?.title}</title>
+        <meta title="description" content={post?.description} />
       </Head>
       <Post post={post} />
     </>
@@ -41,14 +39,14 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     },
   });
 
-  const post = ssg.postById.fetch({
-    id: id as string,
+  const { post } = await ssg.postById.fetch({
+    id: Number(id),
   });
 
   return {
     props: {
       session,
-      post: post,
+      post: JSON.parse(JSON.stringify(post)) as RouterOutput["postById"]["post"],
     },
   };
 }
