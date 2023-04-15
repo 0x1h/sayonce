@@ -1,0 +1,1 @@
+export { PostGrid} from './Feed'

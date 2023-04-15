@@ -1,0 +1,1 @@
+export { PostsEnd } from "./PostsEnd";

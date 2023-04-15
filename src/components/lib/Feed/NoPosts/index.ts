@@ -1,0 +1,1 @@
+export { NoPosts } from "./NoPosts";

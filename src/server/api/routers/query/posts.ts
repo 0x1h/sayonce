@@ -4,19 +4,26 @@ import { publicProcedure } from "../../trpc";
 
 export const posts = () => {
   return publicProcedure
-    .input(z.object({ page: z.number(), limit: z.number() }))
+    .input(
+      z.object({
+        skip: z.number().optional(),
+        cursor: z.number().nullish(),
+      })
+    )
     .query(async ({ input, ctx }) => {
+      const { cursor } = input;
       const posts = await ctx.prisma.post.findMany({
-        skip: Number(input.page) * 10,
-        take: input.limit,
+        take: 11,
+        cursor: cursor ? { id: cursor } : undefined,
         orderBy: { createdAt: "desc" },
-        include: {
-          author: true,
-        },
+        include: { author: true },
       });
 
+      const nextCursor = posts.length ? posts[posts.length - 1]?.id : null;
+
+      posts.length = 10;
+
       return {
-        succuess: true,
         posts: posts.map((post) => ({
           id: post.id,
           gif: post.gif,
@@ -25,6 +32,7 @@ export const posts = () => {
             avatar: post.author.avatar,
           },
         })),
+        nextCursor,
       };
     });
 };

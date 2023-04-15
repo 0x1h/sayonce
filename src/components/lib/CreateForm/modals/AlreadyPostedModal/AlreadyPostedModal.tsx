@@ -7,25 +7,14 @@ import {
 } from "./SAlreadyPostedModal.styled";
 import Link from "next/link";
 
-type GifModalProps = {
-  openModal: boolean;
-  setOpenModal: () => void;
-};
-
-export const AlreadyPostedModal = ({
-  openModal,
-  setOpenModal,
-}: GifModalProps) => {
-  if (!openModal) return null;
-
+export const AlreadyPostedModal = () => {
   return (
     <Modal
       blur
       scroll
       preventClose
       aria-labelledby="modal-title"
-      open={openModal}
-      onClose={() => setOpenModal()}
+      open
       width="500px"
     >
       <Modal.Header>
@@ -47,7 +36,7 @@ export const AlreadyPostedModal = ({
       <Modal.Footer>
         <SConfirmButtonsWrapper>
           <Link href="/" shallow>
-            <Button flat onPress={setOpenModal}>
+            <Button flat>
               Bruh 💀
             </Button>
           </Link>

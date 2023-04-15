@@ -2,7 +2,7 @@ import type { GetServerSidePropsContext, NextPage } from "next";
 import { authOptions } from "@/server/api/auth";
 import { getServerSession } from "next-auth/next";
 import Head from "next/head";
-import { PostGrid } from "@/components/lib/PostGrid";
+import { PostGrid } from "@/components/lib/Feed";
 
 const Home: NextPage = () => {
   return (

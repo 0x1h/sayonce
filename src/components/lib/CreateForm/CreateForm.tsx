@@ -23,6 +23,8 @@ import { ConfirmModal } from "./modals/ConfirmModal";
 import { AuthModal } from "./modals/AuthModal";
 import { AUTH_STAGE_ENUM, AuthContext } from "@/contexts/AuthContext";
 import { SuccessModal } from "./modals/SuccessModal";
+import { api } from "@/utils/api";
+import { AlreadyPostedModal } from "./modals/AlreadyPostedModal";
 
 export const CreateForm = () => {
   const [formValues, setFormValues] = useState(values);
@@ -32,6 +34,11 @@ export const CreateForm = () => {
   const { errors } = useValidate(formValues);
   const { authStage } = useContext(AuthContext);
   const [success, setSuccess] = useState(false);
+  const { mutate: isPostMutate, isError } = api.isPosted.useMutation();
+
+  useEffect(() => {
+    isPostMutate();
+  }, []);
 
   useEffect(() => {
     document.body.style.overflow = "visible";
@@ -58,6 +65,10 @@ export const CreateForm = () => {
 
   if (success) {
     return <SuccessModal />;
+  }
+
+  if (isError) {
+    return <AlreadyPostedModal />;
   }
 
   return (

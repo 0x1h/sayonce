@@ -2,7 +2,7 @@ import type { GetServerSidePropsContext, NextPage } from "next";
 import { authOptions } from "@/server/api/auth";
 import { getServerSession } from "next-auth/next";
 import Head from "next/head";
-import { Post } from "@/components/app/Post";
+import { Article } from "@/components/app/Article";
 import { createServerSideHelpers } from "@trpc/react-query/server";
 import type { inferRouterOutputs } from "@trpc/server";
 import { AppRouter, appRouter } from "@/server/api/root";
@@ -21,7 +21,7 @@ export const PostPage: NextPage<PostProps> = ({ post }) => {
         <title>{post?.title}</title>
         <meta title="description" content={post?.description} />
       </Head>
-      <Post post={post} />
+      <Article post={post} />
     </>
   );
 };

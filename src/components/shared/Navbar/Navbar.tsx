@@ -5,18 +5,20 @@ import {
   Avatar,
   Dropdown,
   Tooltip,
+  Loading,
 } from "@nextui-org/react";
 import { collapseItems } from "./constant/collapseItems";
 import { SNavbarLayout, STextAuthorize } from "./SNavbar.styled";
 import { FaDiscord } from "react-icons/fa";
 import { signIn, signOut } from "next-auth/react";
 import { useSSR } from "@nextui-org/react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AUTH_STAGE_ENUM, AuthContext } from "@/contexts/AuthContext";
 import { useRouter } from "next/router";
 
 export const Navbar = () => {
   const { isBrowser } = useSSR();
+  const [loading, setLoading] = useState(false);
   const { authStage, session } = useContext(AuthContext);
   const { pathname } = useRouter();
 
@@ -51,14 +53,12 @@ export const Navbar = () => {
           hideIn="xs"
           variant="highlight-rounded"
         >
-          <Link href={"/"}>
-            <NextNavbar.Link isActive={pathname === "/"}>Posts</NextNavbar.Link>
-          </Link>
-          <Link href={"/create"}>
-            <NextNavbar.Link isActive={pathname === "/create"}>
-              Create
-            </NextNavbar.Link>
-          </Link>
+          <NextNavbar.Link isActive={pathname === "/"} href="/">
+            Posts
+          </NextNavbar.Link>
+          <NextNavbar.Link isActive={pathname === "/create"} href="/create">
+            Create
+          </NextNavbar.Link>
         </NextNavbar.Content>
         <NextNavbar.Content
           css={{
@@ -90,13 +90,22 @@ export const Navbar = () => {
               {authStage === AUTH_STAGE_ENUM.UNAUTHORIZED ? (
                 <Dropdown.Item key="profile" css={{ height: "$18" }}>
                   <STextAuthorize
-                    onClick={() => {
+                    // eslint-disable-next-line
+                    onClick={async () => {
+                      setLoading(true);
                       // eslint-disable-next-line
                       signIn("discord");
                     }}
                   >
                     <FaDiscord />
-                    Authorize with Discord
+                    <p>Authorize with Discord</p>
+                    {loading && (
+                      <Loading
+                        color={"white"}
+                        size="xs"
+                        style={{ marginLeft: "10px" }}
+                      />
+                    )}
                   </STextAuthorize>
                 </Dropdown.Item>
               ) : (
@@ -107,12 +116,21 @@ export const Navbar = () => {
                 >
                   <STextAuthorize
                     color="error"
+                    // eslint-disable-next-line
                     onClick={() => {
+                      setLoading(true);
                       // eslint-disable-next-line
                       signOut();
                     }}
                   >
-                    Log out
+                    <p>Log out</p>
+                    {loading && (
+                      <Loading
+                        color={"white"}
+                        size="xs"
+                        style={{ marginLeft: "10px" }}
+                      />
+                    )}
                   </STextAuthorize>
                 </Dropdown.Item>
               )}
@@ -122,7 +140,7 @@ export const Navbar = () => {
         <NextNavbar.Collapse>
           {collapseItems.map((item, index) => (
             <NextNavbar.CollapseItem
-              key={item}
+              key={item.name}
               activeColor="primary"
               css={{
                 color: index === collapseItems.length - 1 ? "$error" : "",
@@ -134,9 +152,9 @@ export const Navbar = () => {
                 css={{
                   minWidth: "100%",
                 }}
-                href="#"
+                href={item.link}
               >
-                {item}
+                {item.name}
               </Link>
             </NextNavbar.CollapseItem>
           ))}

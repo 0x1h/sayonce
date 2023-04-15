@@ -1,5 +1,10 @@
 export const collapseItems = [
-  "Posts",
-  "Create",
-  "Log Out",
+  {
+    name: "Posts",
+    link: "/",
+  },
+  {
+    name: "Create",
+    link: "/create",
+  },
 ];
