@@ -21,7 +21,7 @@ export const PostPage: NextPage<PostProps> = ({ post }) => {
         <title>{post?.title}</title>
         <meta property="og:title" content={post?.title} />
         <meta property="og:description" content={post?.description} />
-        <meta property="og:image" content={post.author.avatar} />
+        <meta property="og:image" content={post?.author?.avatar} />
         <meta name="theme-color" content="#0070f1" />
       </Head>
       <Article post={post} />
