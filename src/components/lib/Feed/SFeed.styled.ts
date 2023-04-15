@@ -2,7 +2,7 @@ import styled from "styled-components";
 import tw from "twin.macro";
 
 export const SLoadingCenter = styled.div`
-  ${tw`flex items-center justify-center h-[calc(100vh - 80px)]`}
+  ${tw`flex items-center justify-center flex-col gap-y-3 h-[calc(100vh - 80px)]`}
 `;
 
 export const SWaves = styled.div`

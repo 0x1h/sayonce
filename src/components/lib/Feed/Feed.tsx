@@ -38,36 +38,38 @@ export const PostGrid = () => {
     return <NoPosts />;
   }
 
+  if (postsLoading) {
+    return (
+      <SLoadingCenter>
+        <Loading color={"white"} size="xl" />
+        <p>Trying to grab some posts 🙄</p>
+      </SLoadingCenter>
+    );
+  }
+
   return (
     <>
       <PaddedWrapper>
-        {postsLoading && allPosts?.length === 0 ? (
-          <SLoadingCenter>
-            <Loading color={"white"} size="xl" />
-          </SLoadingCenter>
-        ) : (
-          <Grid.Container gap={2} justify="flex-start">
-            {allPosts?.map((post) => (
-              <Grid xs={12} sm={3} key={post.id}>
-                <PostCard
-                  // eslint-disable-next-line
-                  onPress={async () => await router.push(`/post/${post?.id}`)}
-                  title={post.title}
-                  img={post.gif}
-                  avatar={post.author.avatar}
-                />
-              </Grid>
-            ))}
-          </Grid.Container>
-        )}
-        {postsLoading && <Loading color={"white"} />}
+        <Grid.Container gap={2} justify="flex-start">
+          {allPosts?.map((post) => (
+            <Grid xs={12} sm={3} key={post.id}>
+              <PostCard
+                // eslint-disable-next-line
+                onPress={async () => await router.push(`/post/${post?.id}`)}
+                title={post.title}
+                img={post.gif}
+                avatar={post.author.avatar}
+              />
+            </Grid>
+          ))}
+        </Grid.Container>
         <Observer
           // eslint-disable-next-line
           onObserve={fetchNextPage}
           cancel={cursorId === allPosts?.at(-1)?.id}
         />
       </PaddedWrapper>
-      {cursorId === allPosts?.at(-1)?.id && <PostsEnd />}
+      {cursorId === allPosts?.at(-1)?.id || (postsLoading && <PostsEnd />)}
     </>
   );
 };

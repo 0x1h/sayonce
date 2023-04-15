@@ -18,7 +18,8 @@ export const alreadyPost = t.middleware(async ({ ctx, next }) => {
     },
   });
 
-  if (alreadyPosted) {
+
+  if (alreadyPosted.length > 0) {
     throw new TRPCError({ code: "FORBIDDEN", message: "already posted" });
   }
 

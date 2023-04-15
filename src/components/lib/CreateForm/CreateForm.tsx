@@ -5,6 +5,7 @@ import {
   FormElement,
   Image,
   Input,
+  Loading,
   Text,
   Textarea,
 } from "@nextui-org/react";
@@ -13,6 +14,7 @@ import {
   SCreateForm,
   SCardWrapper,
   STextCenter,
+  SLoadingScreen,
 } from "./SCreateForm.styled";
 import { EmojiSpam } from "@/components/shared/EmojiSpam/EmojiSpam";
 import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
@@ -34,7 +36,11 @@ export const CreateForm = () => {
   const { errors } = useValidate(formValues);
   const { authStage } = useContext(AuthContext);
   const [success, setSuccess] = useState(false);
-  const { mutate: isPostMutate, isError } = api.isPosted.useMutation();
+  const {
+    mutate: isPostMutate,
+    isError,
+    isLoading: postLoading,
+  } = api.isPosted.useMutation();
 
   useEffect(() => {
     isPostMutate();
@@ -58,6 +64,15 @@ export const CreateForm = () => {
 
     setOpenConfirmModal(true);
   };
+
+  if (postLoading) {
+    return (
+      <SLoadingScreen>
+        <Loading size="xl" color={"white"} />
+        <p>Please waitt... 😭</p>
+      </SLoadingScreen>
+    );
+  }
 
   if (authStage === AUTH_STAGE_ENUM.UNAUTHORIZED) {
     return <AuthModal />;
