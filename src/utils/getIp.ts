@@ -1,4 +1,4 @@
-export const getIP = async (): Promise<string> => {
+export const getIp = async (): Promise<string> => {
   // eslint-disable-next-line
   const ipData: { ip: string } = await (
     await fetch("https://api.ipify.org/?format=json")

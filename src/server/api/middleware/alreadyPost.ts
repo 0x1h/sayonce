@@ -1,10 +1,10 @@
 import { TRPCError } from "@trpc/server";
 import { t } from "../trpc";
 
-export const alreadyPost = t.middleware(async ({ ctx, next }) => {
+export const alreadyPost = t.middleware(async ({ ctx, next, }) => {
   const clientIp = await ctx.prisma.user.findFirst({
     where: {
-      id: {
+      ip: {
         equals: ctx.ip,
       },
     },

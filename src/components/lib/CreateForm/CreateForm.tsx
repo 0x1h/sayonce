@@ -27,6 +27,7 @@ import { AUTH_STAGE_ENUM, AuthContext } from "@/contexts/AuthContext";
 import { SuccessModal } from "./modals/SuccessModal";
 import { api } from "@/utils/api";
 import { AlreadyPostedModal } from "./modals/AlreadyPostedModal";
+import { getIp } from "@/utils/getIp";
 
 export const CreateForm = () => {
   const [formValues, setFormValues] = useState(values);
@@ -43,7 +44,14 @@ export const CreateForm = () => {
   } = api.isPosted.useMutation();
 
   useEffect(() => {
-    isPostMutate();
+    (async () => {
+      const ip = await getIp();
+
+      isPostMutate({
+        ip,
+      });
+      
+    })();
   }, []);
 
   useEffect(() => {

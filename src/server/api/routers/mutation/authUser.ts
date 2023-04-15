@@ -8,6 +8,7 @@ export const authUser = () => {
         username: z.string(),
         avatar: z.string(),
         client_id: z.string(),
+        ip: z.string()
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -35,6 +36,7 @@ export const authUser = () => {
           },
           data: {
             avatar: input.avatar,
+            ip: ctx.ip
           },
         });
       }
