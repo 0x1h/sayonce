@@ -69,7 +69,7 @@ export const PostGrid = () => {
           cancel={cursorId === allPosts?.at(-1)?.id}
         />
       </PaddedWrapper>
-      {cursorId === allPosts?.at(-1)?.id || (postsLoading && <PostsEnd />)}
+      {cursorId === allPosts?.at(-1)?.id && (!postsLoading && <PostsEnd />)}
     </>
   );
 };
