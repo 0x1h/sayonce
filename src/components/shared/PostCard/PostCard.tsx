@@ -1,6 +1,7 @@
-import { Avatar, Card, Row } from "@nextui-org/react";
+import { Avatar, Card, Loading, Row } from "@nextui-org/react";
 import Image from "next/image";
 import { SPostCard, SText } from "./PostCard.styled";
+import { useState } from "react";
 
 export type PostCard = {
   img?: string;
@@ -17,8 +18,16 @@ export const PostCard = ({
   avatar,
   onPress,
 }: PostCard) => {
+  const [isPressed, setIsPressed] = useState(false);
+
   return (
-    <Card isPressable onPress={onPress}>
+    <Card
+      isPressable
+      onPress={() => {
+        onPress?.();
+        setIsPressed(true);
+      }}
+    >
       <Card.Body css={{ p: 0 }}>
         <SPostCard>
           <Image
@@ -35,7 +44,16 @@ export const PostCard = ({
       <Card.Footer css={{ justifyItems: "flex-start" }}>
         <Row justify="space-between" align="center">
           <SText b>{title}</SText>
-          <Avatar color="primary" bordered src={avatar} alt={username || ""} />
+          {!isPressed ? (
+            <Avatar
+              color="primary"
+              bordered
+              src={avatar}
+              alt={username || ""}
+            />
+          ) : (
+            <Loading size="md" />
+          )}
         </Row>
       </Card.Footer>
     </Card>
