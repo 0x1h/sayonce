@@ -20,22 +20,21 @@ export const authUser = () => {
       });
 
       if (userExist.length === 0) {
-        await ctx.prisma.user
-          .create({
-            data: {
-              avatar: input.avatar,
-              ip: ctx.ip as string,
-              username: input.username,
-              id: input.client_id,
-            },
-          })
+        await ctx.prisma.user.create({
+          data: {
+            avatar: input.avatar,
+            ip: ctx.ip as string,
+            username: input.username,
+            id: input.client_id,
+          },
+        });
       } else {
         await ctx.prisma.user.update({
           where: {
             id: input.client_id,
           },
           data: {
-            avatar: input.avatar
+            avatar: input.avatar,
           },
         });
       }

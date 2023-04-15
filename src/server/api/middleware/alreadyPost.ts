@@ -4,7 +4,7 @@ import { t } from "../trpc";
 export const alreadyPost = t.middleware(async ({ ctx, next }) => {
   const clientIp = await ctx.prisma.user.findFirst({
     where: {
-      ip: {
+      id: {
         equals: ctx.ip,
       },
     },
@@ -17,7 +17,6 @@ export const alreadyPost = t.middleware(async ({ ctx, next }) => {
       },
     },
   });
-
 
   if (alreadyPosted.length > 0) {
     throw new TRPCError({ code: "FORBIDDEN", message: "already posted" });
