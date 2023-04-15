@@ -10,6 +10,7 @@ const Home: NextPage = () => {
       <Head>
         <title>Sayonce</title>
         <meta title="description" content="Create Post" />
+        <meta name="theme-color" content="#0070f1" />
       </Head>
       <Create />
     </>
@@ -17,14 +18,13 @@ const Home: NextPage = () => {
 };
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-    const session = await getServerSession(context.req, context.res, authOptions);
-  
-    return {
-      props: {
-        session,
-      },
-    };
-  }
+  const session = await getServerSession(context.req, context.res, authOptions);
 
+  return {
+    props: {
+      session,
+    },
+  };
+}
 
 export default Home;
