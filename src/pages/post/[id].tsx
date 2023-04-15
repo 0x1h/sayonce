@@ -19,7 +19,9 @@ export const PostPage: NextPage<PostProps> = ({ post }) => {
     <>
       <Head>
         <title>{post?.title}</title>
-        <meta title="description" content={post?.description} />
+        <meta property="og:title" content={post?.title} />
+        <meta property="og:description" content={post?.description} />
+        <meta property="og:image" content={post.author.avatar} />
       </Head>
       <Article post={post} />
     </>
@@ -46,7 +48,9 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   return {
     props: {
       session,
-      post: JSON.parse(JSON.stringify(post)) as RouterOutput["postById"]["post"],
+      post: JSON.parse(
+        JSON.stringify(post)
+      ) as RouterOutput["postById"]["post"],
     },
   };
 }
