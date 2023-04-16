@@ -23,7 +23,7 @@ export const ProfileCard = ({ author }: PostProps["post"]) => {
         />
       </SProfileAvatar>
       <SProfileInfo>
-        <SProfileInfoName>callmenikk</SProfileInfoName>
+        <SProfileInfoName>{author.username}</SProfileInfoName>
         <SProfileDateWrapper>
           <p>Joined</p>
           <Tooltip
