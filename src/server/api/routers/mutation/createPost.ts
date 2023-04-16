@@ -1,13 +1,13 @@
 import { z } from "zod";
 import { publicProcedure } from "../../trpc";
-import { alreadyPost } from "../../middleware/alreadyPost";
+import { postCooldown } from "../../middleware/postCooldown";
 import { TRPCError } from "@trpc/server";
 import { authorized } from "../../middleware/authorized";
 
 export const createPost = () => {
   return publicProcedure
     .use(authorized)
-    .use(alreadyPost)
+    .use(postCooldown)
     .input(
       z.object({
         client_id: z.string(),

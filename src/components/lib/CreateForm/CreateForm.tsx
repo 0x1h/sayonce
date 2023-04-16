@@ -26,7 +26,7 @@ import { AuthModal } from "./modals/AuthModal";
 import { AUTH_STAGE_ENUM, AuthContext } from "@/contexts/AuthContext";
 import { SuccessModal } from "./modals/SuccessModal";
 import { api } from "@/utils/api";
-import { AlreadyPostedModal } from "./modals/AlreadyPostedModal";
+import { PostCooldownModal } from "./modals/PostCooldownModal";
 
 export const CreateForm = () => {
   const [formValues, setFormValues] = useState(values);
@@ -40,7 +40,8 @@ export const CreateForm = () => {
     mutate: isPostMutate,
     isError,
     isLoading: postLoading,
-  } = api.isPosted.useMutation();
+    error,
+  } = api.postAbility.useMutation();
 
   useEffect(() => {
     isPostMutate();
@@ -83,7 +84,7 @@ export const CreateForm = () => {
   }
 
   if (isError) {
-    return <AlreadyPostedModal />;
+    return <PostCooldownModal date={error.message} />;
   }
 
   return (

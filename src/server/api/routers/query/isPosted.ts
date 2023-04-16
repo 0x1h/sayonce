@@ -1,14 +1,9 @@
 /* eslint-disable */
 import { publicProcedure } from "../../trpc";
-import { alreadyPost } from "../../middleware/alreadyPost";
+import { postCooldown } from "../../middleware/postCooldown";
 
-export const isPosted = () => {
-  return publicProcedure
-    .use(alreadyPost)
-    .mutation(async () => {
-      return {
-        success: true,
-        message: "user never has posted",
-      };
-    });
-};
+export const postAbility = () =>
+  publicProcedure.use(postCooldown).mutation(async () => ({
+    success: true,
+    message: "user can post",
+  }));

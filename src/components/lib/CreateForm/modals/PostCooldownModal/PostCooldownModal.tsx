@@ -1,13 +1,22 @@
-import { Button, Image, Modal } from "@nextui-org/react";
+import { Button, Image, Modal, Tooltip } from "@nextui-org/react";
 import {
   SConfirmButtonsWrapper,
   SConfirmText,
   SConfirmTitle,
   SConfirmWrapper,
+  SCoolDownFree,
 } from "./SAlreadyPostedModal.styled";
 import Link from "next/link";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import { addNextDay } from "./utils/addNextDay";
+dayjs.extend(relativeTime);
 
-export const AlreadyPostedModal = () => {
+type PostCooldownModalProps = {
+  date: string;
+};
+
+export const PostCooldownModal = ({ date }: PostCooldownModalProps) => {
   return (
     <Modal
       blur
@@ -19,15 +28,18 @@ export const AlreadyPostedModal = () => {
     >
       <Modal.Header>
         <SConfirmWrapper>
-          <SConfirmTitle>You already did that</SConfirmTitle>
+          <SConfirmTitle>Post Cooldown</SConfirmTitle>
           <SConfirmText>
-            You already posted once, you can not do that again.
+            You can post only once a day, you will be able to post again
+            <SCoolDownFree>
+              {dayjs(addNextDay(new Date(date))).fromNow()}
+            </SCoolDownFree>
           </SConfirmText>
         </SConfirmWrapper>
       </Modal.Header>
       <Modal.Body>
         <Image
-          src={"https://media.tenor.com/aeswYw-86k8AAAAC/no-nooo.gif"}
+          src={"https://media.tenor.com/tgcRIPI6pmAAAAAC/mr-bean-mr-bean-holiday.gif"}
           alt="confirm image"
           style={{ borderRadius: "10px" }}
           width={"300px"}
@@ -36,9 +48,7 @@ export const AlreadyPostedModal = () => {
       <Modal.Footer>
         <SConfirmButtonsWrapper>
           <Link href="/" shallow>
-            <Button flat>
-              Bruh 💀
-            </Button>
+            <Button flat>Bruh 💀</Button>
           </Link>
         </SConfirmButtonsWrapper>
       </Modal.Footer>
