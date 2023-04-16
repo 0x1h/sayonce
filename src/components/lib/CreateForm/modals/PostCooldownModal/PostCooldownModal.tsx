@@ -30,7 +30,7 @@ export const PostCooldownModal = ({ date }: PostCooldownModalProps) => {
         <SConfirmWrapper>
           <SConfirmTitle>Post Cooldown</SConfirmTitle>
           <SConfirmText>
-            You can post only once a day, you will be able to post again
+            You can only post once per day. You will be able to post again
             <SCoolDownFree>
               {dayjs(addNextDay(new Date(date))).fromNow()}
             </SCoolDownFree>
@@ -39,7 +39,9 @@ export const PostCooldownModal = ({ date }: PostCooldownModalProps) => {
       </Modal.Header>
       <Modal.Body>
         <Image
-          src={"https://media.tenor.com/tgcRIPI6pmAAAAAC/mr-bean-mr-bean-holiday.gif"}
+          src={
+            "https://media.tenor.com/tgcRIPI6pmAAAAAC/mr-bean-mr-bean-holiday.gif"
+          }
           alt="confirm image"
           style={{ borderRadius: "10px" }}
           width={"300px"}
