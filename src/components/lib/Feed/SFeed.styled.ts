@@ -6,7 +6,7 @@ export const SLoadingCenter = styled.div`
 `;
 
 export const SWaves = styled.div`
-  ${tw`w-full overflow-hidden`}
+  ${tw`w-full overflow-hidden relative`}
   svg {
     ${tw`object-cover absolute w-full min-w-[1000px] bottom-0 left-0`}
   }
