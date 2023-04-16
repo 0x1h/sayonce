@@ -4,8 +4,8 @@ import { t } from "../trpc";
 export const alreadyPost = t.middleware(async ({ ctx, next, }) => {
   const clientIp = await ctx.prisma.user.findFirst({
     where: {
-      ip: {
-        equals: ctx.ip,
+      id: {
+        equals: ctx.id,
       },
     },
   });

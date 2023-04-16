@@ -46,27 +46,18 @@ export const IntroModal = () => {
             <Spacer />
             <ul>
               <li>
-                • I use cookies on this website to store user token, which
-                allow us to keep you logged in and provide you with a better
-                browsing experience. Cookies are small text files that are
-                stored on your device when you visit our site. They help us
-                remember your preferences and keep you authenticated
+                • I use cookies on this website to store user token, which allow
+                us to keep you logged in and provide you with a better browsing
+                experience. Cookies are small text files that are stored on your
+                device when you visit our site. They help us remember your
+                preferences and keep you authenticated
               </li>
               <li>• I use your Discord account for authorization</li>
-              <li>
-                • I also track your IP address. Why? Because this project is
-                called &quot;SayOnce&quot;, which means that you can only post
-                here once and never again. That&apos;s the whole point.
-                Therefore, we want you to follow this rule and say something
-                only once. Your IP address will help us ensure that you comply
-                with this rule and do not deceive us.
-              </li>
               <li>
                 • When you post here, we save your data
                 <SintroModalP>
                   - Your Discord ID, username and avatar
                 </SintroModalP>
-                <SintroModalP>- Your IP address</SintroModalP>
                 <SintroModalP>- Date when you posted</SintroModalP>
                 <SintroModalP>
                   - All the content what you mentioned in post
@@ -83,6 +74,9 @@ export const IntroModal = () => {
           <SIntroImageWrapper>
             <SIntroModalImage
               alt={"pointing gun"}
+              style={{
+                objectFit: 'cover'
+              }}
               src={
                 "https://i.kym-cdn.com/photos/images/newsfeed/002/337/829/005.gif"
               }

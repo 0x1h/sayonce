@@ -36,9 +36,9 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const ssg = createServerSideHelpers({
     router: appRouter,
     ctx: {
-      ip: "",
       prisma: prisma,
       session: session,
+      id: session?.user.id
     },
   });
 

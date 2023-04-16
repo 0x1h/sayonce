@@ -2,8 +2,7 @@ import { AuthContext } from "@/contexts/AuthContext";
 import type { Session } from "next-auth";
 import { isAuth } from "./utils/isAuth";
 import { api } from "@/utils/api";
-import { useEffect, useState } from "react";
-import { getIp } from "@/utils/getIp";
+import { useEffect } from "react";
 
 type AuthProviderProps = {
   session?: Session;
@@ -18,16 +17,11 @@ export const AuthProvider = ({
   useEffect(() => {
     if (!session) return;
 
-    (async () => {
-      const ip = await getIp();
-
-      authUser.mutate({
-        avatar: session.user.image as string,
-        client_id: session.user.id,
-        username: session.user.name as string,
-        ip,
-      });
-    })();
+    authUser.mutate({
+      avatar: session.user.image as string,
+      client_id: session.user.id,
+      username: session.user.name as string,
+    });
   }, [session]);
 
   return (

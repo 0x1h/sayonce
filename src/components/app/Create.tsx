@@ -1,7 +1,5 @@
-import { CreateForm } from '../lib/CreateForm'
+import { CreateForm } from "../lib/CreateForm";
 
 export const Create = () => {
-  return (
-    <CreateForm />
-  )
-}
+  return <CreateForm />;
+};

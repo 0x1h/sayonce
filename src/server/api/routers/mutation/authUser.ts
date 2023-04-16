@@ -8,7 +8,6 @@ export const authUser = () => {
         username: z.string(),
         avatar: z.string(),
         client_id: z.string(),
-        ip: z.string()
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -24,7 +23,6 @@ export const authUser = () => {
         await ctx.prisma.user.create({
           data: {
             avatar: input.avatar,
-            ip: ctx.ip as string,
             username: input.username,
             id: input.client_id,
           },
@@ -36,7 +34,6 @@ export const authUser = () => {
           },
           data: {
             avatar: input.avatar,
-            ip: ctx.ip
           },
         });
       }

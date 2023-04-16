@@ -14,7 +14,6 @@ model User {
   id        String   @id @unique
   username  String
   avatar    String
-  ip        String
   createdAt DateTime @default(now())
   Post      Post[]
 }
