@@ -1,7 +1,7 @@
 /* eslint-disable */
 import { z } from "zod";
 import { publicProcedure } from "../../trpc";
-
+import { getReactions } from "../../controller/getReactions";
 
 export const postById = () => {
   return publicProcedure
@@ -13,12 +13,16 @@ export const postById = () => {
         },
         include: {
           author: true,
+          reactions: true,
         },
       });
+
+      const reactions = await getReactions(ctx.prisma, post, ctx.id);
 
       return {
         succuess: true,
         post: {
+          id: post?.id,
           title: post?.title,
           description: post?.description,
           createdAt: post?.createdAt,
@@ -28,6 +32,7 @@ export const postById = () => {
             avatar: post?.author.avatar,
             joinedAt: post?.author.createdAt,
           },
+          reactions,
         },
       };
     });
