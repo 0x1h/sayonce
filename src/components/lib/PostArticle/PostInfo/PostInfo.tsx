@@ -9,7 +9,10 @@ import {
 import { Image, Tooltip } from "@nextui-org/react";
 import { PostProps } from "@/pages/post/[id]";
 import { PostReactions } from "./PostReactions";
+import { useRouter } from "next/router";
 import { api } from "@/utils/api";
+import { useState } from "react";
+import { LimitWarnModal } from "../LimitWarn";
 
 export const PostInfo = ({
   createdAt,
@@ -19,17 +22,33 @@ export const PostInfo = ({
   reactions,
   id,
 }: PostProps["post"]) => {
+  const router = useRouter();
   const { mutate: addReactionMutate } = api.addReaction.useMutation();
+  const [reactLimitModal, setReactLimitModal] = useState(false);
 
   const reactHandler = (emoji: string) => {
-    addReactionMutate({
-      emoji,
-      postId: id as number,
-    });
+    addReactionMutate(
+      {
+        emoji,
+        postId: id as number,
+      },
+      {
+        // eslint-disable-next-line
+        onSuccess: async () => {
+          await router.replace(router.asPath, undefined, { scroll: false });
+        },
+        onError: () => {
+          setReactLimitModal(true);
+        },
+      }
+    );
   };
 
   return (
     <SPostInfo>
+      {reactLimitModal && (
+        <LimitWarnModal onClose={() => setReactLimitModal(false)} />
+      )}
       <SPostInfoTitle>{title}</SPostInfoTitle>
       <SPostInfoDescription>{description}</SPostInfoDescription>
       <SImageGif>

@@ -7,7 +7,7 @@ import { RouterOutput } from "@/pages/post/[id]";
 
 export type PostReactionsProps = {
   postId: number;
-  onEmojiClick?: (emoji: string) => void;
+  onEmojiClick: (emoji: string) => void;
   reactions: RouterOutput["postById"]["post"]["reactions"];
 };
 
@@ -18,7 +18,7 @@ export const PostReactions = ({
   return (
     <SPostReactions>
       {reactions?.map((reaction) => (
-        <Reaction {...reaction} key={reaction.id} />
+        <Reaction {...reaction} key={reaction.id} onEmojiClick={onEmojiClick} />
       ))}
       <Tooltip color={"primary"} content="Add Reaction">
         <Popover placement="top" shouldCloseOnBlur>

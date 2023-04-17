@@ -17,11 +17,15 @@ export const getReactions = async (
 
   const formattedReactions = await Promise.all(
     post.reactions.map(async (reaction) => {
-      const totalReactions = await prisma.postReaction.count({
+      const postReaction = await prisma.postReaction.findUnique({
         where: {
-          postId: post.id,
           id: reaction.id,
         },
+        include: { reactedBy: true },
+      });
+
+      const totalReactions = await prisma.user.count({
+        where: { id: { in: postReaction?.reactedBy.map((user) => user.id) } },
       });
 
       const includesMe = await prisma.postReaction.findFirst({

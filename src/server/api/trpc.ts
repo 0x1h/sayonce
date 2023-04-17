@@ -25,7 +25,7 @@ export const createTRPCContext = async ({
 
   return createInnerTRPCContext({
     session,
-    id: session?.user.id
+    id: session?.user.id,
   });
 };
 

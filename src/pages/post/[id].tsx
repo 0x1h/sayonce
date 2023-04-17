@@ -38,7 +38,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     ctx: {
       prisma: prisma,
       session: session,
-      id: session?.user.id
+      id: session?.user.id,
     },
   });
 
