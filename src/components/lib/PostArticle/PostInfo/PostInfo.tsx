@@ -9,7 +9,6 @@ import {
 import { Image, Tooltip } from "@nextui-org/react";
 import { PostProps } from "@/pages/post/[id]";
 import { PostReactions } from "./PostReactions";
-import { useRouter } from "next/router";
 import { api } from "@/utils/api";
 import { useState } from "react";
 import { LimitWarnModal } from "../LimitWarn";
@@ -19,12 +18,13 @@ export const PostInfo = ({
   description,
   title,
   gif,
-  reactions,
   id,
 }: PostProps["post"]) => {
-  const router = useRouter();
   const { mutate: addReactionMutate, isLoading } =
     api.addReaction.useMutation();
+  const { data: postReactions, refetch } = api.postReactions.useQuery({
+    postById: id as number,
+  });
   const [reactLimitModal, setReactLimitModal] = useState(false);
 
   const reactHandler = (emoji: string) => {
@@ -34,9 +34,9 @@ export const PostInfo = ({
         postId: id as number,
       },
       {
-        // eslint-disable-next-line
-        onSuccess: async () => {
-          await router.replace(router.asPath, undefined, { scroll: false });
+        onSuccess: () => {
+          // eslint-disable-next-line
+          refetch();
         },
         onError: () => {
           setReactLimitModal(true);
@@ -58,7 +58,7 @@ export const PostInfo = ({
       <PostReactions
         isLoading={isLoading}
         postId={id as number}
-        reactions={reactions}
+        reactions={postReactions?.reactions || []}
         onEmojiClick={reactHandler}
       />
       <Tooltip

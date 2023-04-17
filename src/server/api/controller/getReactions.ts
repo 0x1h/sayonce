@@ -1,22 +1,15 @@
 import { prisma as prismaApi } from "@/server/db";
 import { Post, PostReaction, User } from "@prisma/client";
 
-type PostType =
-  | (Post & {
-      author: User;
-      reactions: PostReaction[];
-    })
-  | null;
-
 export const getReactions = async (
   prisma: typeof prismaApi,
-  post: PostType,
+  reactions: PostReaction[],
   id?: string
 ) => {
-  if (!post) return [];
+  if (!reactions) return [];
 
   const formattedReactions = await Promise.all(
-    post.reactions.map(async (reaction) => {
+    reactions?.map(async (reaction) => {
       const postReaction = await prisma.postReaction.findUnique({
         where: {
           id: reaction.id,

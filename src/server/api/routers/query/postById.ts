@@ -17,8 +17,6 @@ export const postById = () => {
         },
       });
 
-      const reactions = await getReactions(ctx.prisma, post, ctx.id);
-
       return {
         succuess: true,
         post: {
@@ -32,7 +30,6 @@ export const postById = () => {
             avatar: post?.author.avatar,
             joinedAt: post?.author.createdAt,
           },
-          reactions,
         },
       };
     });

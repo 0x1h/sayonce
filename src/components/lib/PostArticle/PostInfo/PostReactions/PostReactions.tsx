@@ -8,7 +8,7 @@ import { RouterOutput } from "@/pages/post/[id]";
 export type PostReactionsProps = {
   postId: number;
   onEmojiClick: (emoji: string) => void;
-  reactions: RouterOutput["postById"]["post"]["reactions"];
+  reactions: RouterOutput["postReactions"]["reactions"];
   isLoading: boolean;
 };
 
