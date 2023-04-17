@@ -5,6 +5,7 @@ import { createPost } from "./routers/mutation/createPost";
 import { posts } from "./routers/query/posts";
 import { postById } from "./routers/query/postById";
 import { postAbility } from "./routers/query/isPosted";
+import { addReaction } from "./routers/mutation/addPostReaction";
 
 export const appRouter = createTRPCRouter({
   gif: gif(),
@@ -13,6 +14,7 @@ export const appRouter = createTRPCRouter({
   posts: posts(),
   postById: postById(),
   postAbility: postAbility(),
+  addReaction: addReaction()
 });
 
 // export type definition of API

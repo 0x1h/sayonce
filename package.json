@@ -10,6 +10,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@emoji-mart/react": "^1.1.1",
     "@emotion/react": "^11.10.6",
     "@nextui-org/react": "^1.0.0-beta.12",
     "@prisma/client": "^4.12.0",
@@ -20,6 +21,7 @@
     "@trpc/server": "^10.9.0",
     "@types/react-icons": "^3.0.0",
     "dayjs": "^1.11.7",
+    "emoji-mart": "^5.5.2",
     "lodash": "^4.17.21",
     "next": "^13.2.1",
     "next-auth": "^4.19.0",

@@ -8,7 +8,7 @@ import type { inferRouterOutputs } from "@trpc/server";
 import { AppRouter, appRouter } from "@/server/api/root";
 import { prisma } from "@/server/db";
 
-type RouterOutput = inferRouterOutputs<AppRouter>;
+export type RouterOutput = inferRouterOutputs<AppRouter>;
 
 export type PostProps = {
   post: RouterOutput["postById"]["post"];

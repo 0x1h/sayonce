@@ -11,19 +11,29 @@ datasource db {
 }
 
 model User {
-  id        String   @id @unique
-  username  String
-  avatar    String
-  createdAt DateTime @default(now())
-  Post      Post[]
+  id           String         @id @unique
+  username     String
+  avatar       String
+  createdAt    DateTime       @default(now())
+  Post         Post[]
+  PostReaction PostReaction[]
+}
+
+model PostReaction {
+  id        String @id @default(cuid())
+  emoji     String
+  reactedBy User[]
+  Post      Post?  @relation(fields: [postId], references: [id])
+  postId    Int?
 }
 
 model Post {
-  id          Int      @id @default(autoincrement())
+  id          Int            @id @default(autoincrement())
   title       String
   description String
-  createdAt   DateTime @default(now())
+  createdAt   DateTime       @default(now())
   gif         String
-  author      User     @relation(fields: [userId], references: [id])
+  author      User           @relation(fields: [userId], references: [id])
   userId      String
+  reactions   PostReaction[]
 }
