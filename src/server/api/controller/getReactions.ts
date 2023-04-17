@@ -4,9 +4,7 @@ import { Post, PostReaction, User } from "@prisma/client";
 type PostType =
   | (Post & {
       author: User;
-      reactions: (PostReaction & {
-        reactedBy: User[];
-      })[];
+      reactions: PostReaction[];
     })
   | null;
 

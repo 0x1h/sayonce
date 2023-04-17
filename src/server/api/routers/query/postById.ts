@@ -13,11 +13,7 @@ export const postById = () => {
         },
         include: {
           author: true,
-          reactions: {
-            include: {
-              reactedBy: true,
-            },
-          },
+          reactions: true,
         },
       });
 
