@@ -23,7 +23,8 @@ export const PostInfo = ({
   id,
 }: PostProps["post"]) => {
   const router = useRouter();
-  const { mutate: addReactionMutate } = api.addReaction.useMutation();
+  const { mutate: addReactionMutate, isLoading } =
+    api.addReaction.useMutation();
   const [reactLimitModal, setReactLimitModal] = useState(false);
 
   const reactHandler = (emoji: string) => {
@@ -55,6 +56,7 @@ export const PostInfo = ({
         <Image src={gif as string} objectFit="cover" alt="content image" />
       </SImageGif>
       <PostReactions
+        isLoading={isLoading}
         postId={id as number}
         reactions={reactions}
         onEmojiClick={reactHandler}
