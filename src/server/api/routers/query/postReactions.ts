@@ -9,10 +9,9 @@ export const postReactions = () => {
     .query(async ({ input, ctx }) => {
       const postReactions = await ctx.prisma.postReaction.findMany({
         where: {
-          postId: input.postById,
+          postId: Number(input.postById),
         },
       });
-
 
       const reactions = await getReactions(ctx.prisma, postReactions, ctx.id);
 

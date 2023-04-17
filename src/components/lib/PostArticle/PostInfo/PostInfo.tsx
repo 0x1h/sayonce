@@ -12,6 +12,12 @@ import { PostReactions } from "./PostReactions";
 import { api } from "@/utils/api";
 import { useState } from "react";
 import { LimitWarnModal } from "../LimitWarn";
+import { inferRouterOutputs } from "@trpc/server";
+import { AppRouter } from "@/server/api/root";
+import { reactIllustion } from "./utils/reactIllusion";
+
+export type ReactionType =
+  inferRouterOutputs<AppRouter>["postReactions"]["reactions"];
 
 export const PostInfo = ({
   createdAt,
@@ -20,14 +26,23 @@ export const PostInfo = ({
   gif,
   id,
 }: PostProps["post"]) => {
-  const { mutate: addReactionMutate, isLoading } =
+  const [reactions, setReactions] = useState<ReactionType>([]);
+  const { mutate: addReactionMutate } =
     api.addReaction.useMutation();
-  const { data: postReactions, refetch } = api.postReactions.useQuery({
-    postById: id as number,
-  });
+  const { refetch, isLoading } = api.postReactions.useQuery(
+    {
+      postById: id as number,
+    },
+    {
+      onSuccess: ({ reactions }) => {
+        setReactions(reactions);
+      },
+    }
+  );
   const [reactLimitModal, setReactLimitModal] = useState(false);
 
   const reactHandler = (emoji: string) => {
+    setReactions((prev) => reactIllustion(emoji, prev));
     addReactionMutate(
       {
         emoji,
@@ -58,7 +73,7 @@ export const PostInfo = ({
       <PostReactions
         isLoading={isLoading}
         postId={id as number}
-        reactions={postReactions?.reactions || []}
+        reactions={reactions}
         onEmojiClick={reactHandler}
       />
       <Tooltip

@@ -1,7 +1,6 @@
 /* eslint-disable */
 import { z } from "zod";
 import { publicProcedure } from "../../trpc";
-import { getReactions } from "../../controller/getReactions";
 
 export const postById = () => {
   return publicProcedure
@@ -9,7 +8,7 @@ export const postById = () => {
     .query(async ({ input, ctx }) => {
       const post = await ctx.prisma.post.findUnique({
         where: {
-          id: input.id,
+          id: Number(input.id),
         },
         include: {
           author: true,

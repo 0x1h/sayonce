@@ -22,11 +22,12 @@ export const PostReactions = ({
       {reactions?.map((reaction) => (
         <Reaction {...reaction} key={reaction.id} onEmojiClick={onEmojiClick} />
       ))}
+      {isLoading && <Loading size="xs" />}
       <Tooltip color={"primary"} content="Add Reaction">
         <Popover placement="top" shouldCloseOnBlur>
           <Popover.Trigger>
             <SAddReaction>
-              {isLoading ? <Loading size="xs" /> : <AddEmoji />}
+              <AddEmoji />
             </SAddReaction>
           </Popover.Trigger>
           <Popover.Content>
