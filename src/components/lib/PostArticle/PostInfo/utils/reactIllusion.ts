@@ -1,5 +1,4 @@
 import { ReactionType } from "../PostInfo";
-import crypto from "crypto";
 
 export const reactIllustion = (emoji: string, reactionData: ReactionType): ReactionType => {
   const isEmojiIncludes = reactionData.find((react) => react.emoji === emoji);
@@ -24,7 +23,7 @@ export const reactIllustion = (emoji: string, reactionData: ReactionType): React
     emoji,
     includesMe: true,
     totalReactions: 1,
-    id: crypto.randomUUID(),
+    id: new Date().getTime().toString(),
   };
 
   return [...reactionData, addNewEmoji]

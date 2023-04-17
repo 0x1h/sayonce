@@ -5,16 +5,18 @@ import {
   SPostInfo,
   SPostInfoDescription,
   SPostInfoTitle,
+  SUnAuthorizedWarn,
 } from "./SPostInfo.styled";
 import { Image, Tooltip } from "@nextui-org/react";
 import { PostProps } from "@/pages/post/[id]";
 import { PostReactions } from "./PostReactions";
 import { api } from "@/utils/api";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { LimitWarnModal } from "../LimitWarn";
 import { inferRouterOutputs } from "@trpc/server";
 import { AppRouter } from "@/server/api/root";
 import { reactIllustion } from "./utils/reactIllusion";
+import { AUTH_STAGE_ENUM, AuthContext } from "@/contexts/AuthContext";
 
 export type ReactionType =
   inferRouterOutputs<AppRouter>["postReactions"]["reactions"];
@@ -26,12 +28,12 @@ export const PostInfo = ({
   gif,
   id,
 }: PostProps["post"]) => {
+  const { authStage } = useContext(AuthContext);
   const [reactions, setReactions] = useState<ReactionType>([]);
-  const { mutate: addReactionMutate } =
-    api.addReaction.useMutation();
+  const { mutate: addReactionMutate } = api.addReaction.useMutation();
   const { refetch, isLoading } = api.postReactions.useQuery(
     {
-      postById: id as number,
+      postById: id || 0,
     },
     {
       onSuccess: ({ reactions }) => {
@@ -41,7 +43,11 @@ export const PostInfo = ({
   );
   const [reactLimitModal, setReactLimitModal] = useState(false);
 
-  const reactHandler = (emoji: string) => {
+  const reactHandler = (emoji: string | undefined) => {
+    console.log(emoji);
+    
+    if (!emoji) return;
+
     setReactions((prev) => reactIllustion(emoji, prev));
     addReactionMutate(
       {
@@ -70,11 +76,15 @@ export const PostInfo = ({
       <SImageGif>
         <Image src={gif as string} objectFit="cover" alt="content image" />
       </SImageGif>
+      {authStage === AUTH_STAGE_ENUM.UNAUTHORIZED && (
+        <SUnAuthorizedWarn>Authorize first to react</SUnAuthorizedWarn>
+      )}
       <PostReactions
         isLoading={isLoading}
         postId={id as number}
         reactions={reactions}
         onEmojiClick={reactHandler}
+        authorized={authStage}
       />
       <Tooltip
         color="primary"
