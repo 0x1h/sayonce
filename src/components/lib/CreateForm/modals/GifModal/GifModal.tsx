@@ -61,7 +61,7 @@ export const GifModal = ({
           <SGifEmojiContainer>
             <Twemoji>🧐</Twemoji>
             <Text b>
-            Fun Fact: If you would put some words in search would be great
+              Fun Fact: If you would put some words in search would be great
             </Text>
           </SGifEmojiContainer>
         )}

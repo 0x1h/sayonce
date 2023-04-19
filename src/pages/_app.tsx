@@ -15,7 +15,7 @@ const MyApp: AppType<{ session?: Session }> = ({
   return (
     <SessionProvider session={session}>
       <Provider session={session}>
-        <GlobalStyles />
+        {/* <GlobalStyles /> */}
         <Component {...pageProps} />
       </Provider>
     </SessionProvider>

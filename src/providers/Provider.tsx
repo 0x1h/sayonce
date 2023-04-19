@@ -1,6 +1,5 @@
 import { Navbar } from "@/components/shared/Navbar";
 import { GlobalModals } from "./GlobalModalsProvider";
-import { NextUi } from "./NextUiProvider";
 import { AuthProvider } from "./AuthProvider/AuthProvider";
 import type { Session } from "next-auth";
 
@@ -14,10 +13,8 @@ export const Provider = ({
 }: React.PropsWithChildren<ProviderProps>) => {
   return (
     <AuthProvider session={session}>
-      <NextUi>
-        <Navbar />
-        <GlobalModals>{children}</GlobalModals>
-      </NextUi>
+      <Navbar />
+      <GlobalModals>{children}</GlobalModals>
     </AuthProvider>
   );
 };

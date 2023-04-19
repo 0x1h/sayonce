@@ -11,18 +11,14 @@ import { collapseItems } from "./constant/collapseItems";
 import { SNavbarLayout, STextAuthorize } from "./SNavbar.styled";
 import { FaDiscord } from "react-icons/fa";
 import { signIn, signOut } from "next-auth/react";
-import { useSSR } from "@nextui-org/react";
 import { useContext, useState } from "react";
 import { AUTH_STAGE_ENUM, AuthContext } from "@/contexts/AuthContext";
 import { useRouter } from "next/router";
 
 export const Navbar = () => {
-  const { isBrowser } = useSSR();
   const [loading, setLoading] = useState(false);
   const { authStage, session } = useContext(AuthContext);
   const { pathname } = useRouter();
-
-  if (!isBrowser) return null;
 
   return (
     <SNavbarLayout>

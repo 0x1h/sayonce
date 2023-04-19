@@ -1,6 +1,5 @@
 import { PaddedWrapper } from "@/components/shared/PaddedWrapper";
 import {
-  Button,
   Card,
   FormElement,
   Image,
@@ -9,6 +8,7 @@ import {
   Text,
   Textarea,
 } from "@nextui-org/react";
+import { Button, buttonVariants } from "@/components/shared/Button";
 import {
   SCreateWrapper,
   SCreateForm,
@@ -105,7 +105,8 @@ export const CreateForm = () => {
       />
       <SCreateForm onSubmit={submitHandler}>
         <SCreateWrapper>
-          <Input
+          <Input />
+          {/* <Input
             size="xl"
             label="Title"
             name="title"
@@ -114,7 +115,7 @@ export const CreateForm = () => {
             aria-labelledby="search"
             status={errors.title && submited ? "error" : "default"}
             helperText={errors.title && submited ? errors.title : ""}
-          />
+          /> */}
           <Textarea
             size="xl"
             onChange={inputHandler}
@@ -157,9 +158,7 @@ export const CreateForm = () => {
             </Card>
           </SCardWrapper>
           <SCardWrapper>
-            <Button flat size="xl" color="success" type="submit">
-              Post ✨
-            </Button>
+            <Button>Post ✨</Button>
           </SCardWrapper>
         </SCreateWrapper>
       </SCreateForm>

@@ -44,6 +44,7 @@ const GlobalStyles = () => (
   <>
     <CustomStyles />
   </>
+  
 );
 
 export default GlobalStyles;
