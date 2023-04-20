@@ -30,7 +30,9 @@ module.exports = {
         foreground: "hsl(var(--foreground))",
         transparent: "transparent",
         blue: "#0070f1",
+        success: "#59ff64",
         gray: "#161819",
+        ragoon: "#16181A",
         white: "#FFF",
         primary: {
           DEFAULT: "hsl(var(--primary))",
@@ -68,6 +70,9 @@ module.exports = {
       },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
+      },
+      fontSize: {
+        "font-lg": "1.125rem",
       },
       keyframes: {
         "accordion-down": {
