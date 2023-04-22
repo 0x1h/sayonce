@@ -1,4 +1,3 @@
-import { Button, Image, Modal, Tooltip } from "@nextui-org/react";
 import {
   SConfirmButtonsWrapper,
   SConfirmText,
@@ -10,6 +9,10 @@ import Link from "next/link";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { addNextDay } from "./utils/addNextDay";
+import { Modal } from "@/components/shared/Modal";
+import Image from "next/image";
+import { Button } from "@/components/shared/Button";
+import { SCenter } from "../ConfirmModal/SConfirmModal.styled";
 dayjs.extend(relativeTime);
 
 type PostCooldownModalProps = {
@@ -18,14 +21,7 @@ type PostCooldownModalProps = {
 
 export const PostCooldownModal = ({ date }: PostCooldownModalProps) => {
   return (
-    <Modal
-      blur
-      scroll
-      preventClose
-      aria-labelledby="modal-title"
-      open
-      width="500px"
-    >
+    <Modal blur preventClose open width={500}>
       <Modal.Header>
         <SConfirmWrapper>
           <SConfirmTitle>Post Cooldown</SConfirmTitle>
@@ -38,19 +34,35 @@ export const PostCooldownModal = ({ date }: PostCooldownModalProps) => {
         </SConfirmWrapper>
       </Modal.Header>
       <Modal.Body>
-        <Image
-          src={
-            "https://media.tenor.com/tgcRIPI6pmAAAAAC/mr-bean-mr-bean-holiday.gif"
-          }
-          alt="confirm image"
-          style={{ borderRadius: "10px" }}
-          width={"300px"}
-        />
+        <SCenter>
+          <Image
+            src={
+              "https://media.tenor.com/tgcRIPI6pmAAAAAC/mr-bean-mr-bean-holiday.gif"
+            }
+            alt="confirm image"
+            style={{ borderRadius: "10px" }}
+            width={300}
+            height={300}
+          />
+        </SCenter>
       </Modal.Body>
       <Modal.Footer>
         <SConfirmButtonsWrapper>
-          <Link href="/" shallow>
-            <Button flat>Bruh 💀</Button>
+          <Link
+            href="/"
+            shallow
+            style={{
+              width: "100%",
+            }}
+          >
+            <Button
+              style={{
+                width: "100%",
+              }}
+              flat
+            >
+              Bruh 💀
+            </Button>
           </Link>
         </SConfirmButtonsWrapper>
       </Modal.Footer>

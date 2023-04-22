@@ -1,4 +1,4 @@
-import { IntroModal } from "@/components/shared/Modals/IntroModal";
+import { IntroModal } from "@/components/lib/IntroModal";
 import { GlobalModalsContext } from "@/contexts/GlobalModalsContext";
 import { useState } from "react";
 

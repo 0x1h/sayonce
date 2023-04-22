@@ -1,6 +1,5 @@
 import styled, { css } from "styled-components";
 import tw from "twin.macro";
-import { errorMessage } from "./utils/errorMessage.utils";
 
 export const SCreateForm = styled.form`
   ${tw`mt-12 pb-9`}
@@ -65,11 +64,14 @@ export const STextCenter = styled.div`
 `;
 
 export const SLoadingScreen = styled.div`
-  ${tw`h-[calc(100vh - 80px)] flex justify-center text-center flex-col gap-y-3`}
+  ${tw`h-[calc(100vh - 80px)] flex justify-center items-center text-center flex-col gap-y-3`}
 `;
 
 export const SGifCard = styled.div<{ errorMessage?: boolean }>`
-  ${tw`bg-ragoon p-3 rounded-2xl transition-all active:scale-95`}
+  ${tw`bg-ragoon rounded-2xl transition-all active:scale-95 grid place-content-center`}
+  img {
+    ${tw`rounded-xl`}
+  }
   ${(props) => {
     if (props.errorMessage) {
       return css`
@@ -78,3 +80,8 @@ export const SGifCard = styled.div<{ errorMessage?: boolean }>`
     }
   }}
 `;
+
+
+SGifCard.defaultProps = {
+  tabIndex: 0
+}

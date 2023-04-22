@@ -11,7 +11,7 @@ export const SConfirmText = styled.p`
 `
 
 export const SConfirmWrapper = styled.div`
-  ${tw`flex flex-col`}
+  ${tw`flex flex-col items-center`}
 `
 
 export const SConfirmButtonsWrapper = styled.div`
@@ -19,4 +19,12 @@ export const SConfirmButtonsWrapper = styled.div`
   button {
     ${tw`app-max-width-small:w-[calc(100% - 50px)]`}
   }
+`
+
+export const SCenter = styled.div`
+  ${tw`flex items-center justify-center`}
+`
+
+export const SLoadingSubmit = styled.div`
+  ${tw`p-3 flex flex-col items-center gap-y-3`}
 `

@@ -3,7 +3,7 @@ import tw from "twin.macro";
 
 type ButtonProps = {
   size?: "xs" | "lg" | "xl";
-  color?: "success";
+  color?: "success" | "error";
   flat?: boolean;
 };
 
@@ -19,10 +19,20 @@ export const SButton = styled.button<ButtonProps>`
         ${tw`bg-blue/20 text-blue`};
       `;
     }
+    if (props.flat && props.color === "error") {
+      return css`
+        ${tw`bg-[#f4256d]/20! text-[#f4256d]!`};
+      `;
+    }
   }}
   ${(props) => {
     if (props.size === "lg") {
       return css``;
+    }
+    if (props.size === "xl") {
+      return css`
+        ${tw`h-14 text-font-lg`}
+      `;
     }
   }}
 `;

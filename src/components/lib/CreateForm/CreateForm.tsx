@@ -1,5 +1,4 @@
 import { PaddedWrapper } from "@/components/shared/PaddedWrapper";
-import { Card, Image, Loading } from "@nextui-org/react";
 import { Button } from "@/components/shared/Button";
 import {
   SCreateWrapper,
@@ -24,6 +23,8 @@ import { PostCooldownModal } from "./modals/PostCooldownModal";
 import { Input } from "@/components/shared/Input";
 import { Textarea } from "@/components/shared/Textarea";
 import { errorMessage } from "./utils/errorMessage.utils";
+import Image from "next/image";
+import { Loading } from "@/components/shared/Loading";
 
 export const CreateForm = () => {
   const [formValues, setFormValues] = useState(values);
@@ -136,7 +137,11 @@ export const CreateForm = () => {
             >
               Gif
             </SText>
+
             <SGifCard
+              onKeyUpCapture={(e) => {
+                if (e.key === "Enter") setOpenModal(true);
+              }}
               errorMessage={
                 !!errorMessage({
                   text: errors.gif as string,
@@ -149,8 +154,12 @@ export const CreateForm = () => {
               {formValues?.gif ? (
                 <Image
                   src={formValues.gif}
-                  className="rounded-2xl"
                   alt="content gif"
+                  width={500}
+                  height={500}
+                  style={{
+                    objectFit: "cover",
+                  }}
                 />
               ) : (
                 <>
@@ -165,7 +174,7 @@ export const CreateForm = () => {
             </SGifCard>
           </SCardWrapper>
           <SCardWrapper>
-            <Button>Post ✨</Button>
+            <Button size="xl">Post ✨</Button>
           </SCardWrapper>
         </SCreateWrapper>
       </SCreateForm>

@@ -90,8 +90,4 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    //@ts-ignore
-    require("tailwindcss-animate"),
-  ],
 };
