@@ -1,7 +1,7 @@
 import Twemoji from "react-twemoji";
 import { SNoPosts } from "./SNoPosts.styled";
-import { Button } from "@nextui-org/react";
 import Link from "next/link";
+import { Button } from "@/components/shared/Button";
 
 export const NoPosts = () => {
   return (

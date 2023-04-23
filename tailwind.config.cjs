@@ -2,8 +2,8 @@ const { fontFamily } = require("tailwindcss/defaultTheme");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: ["class"],
-  content: ["./src/**/*.{js,ts,jsx,tsx}"],
+  content: ["./src/**/*.{js,ts,jsx,tsx}",
+],
   theme: {
     container: {
       center: true,
@@ -17,6 +17,10 @@ module.exports = {
       "app-max-width-small": { max: "768px" },
       "app-max-width-medium": { max: "1024px" },
       "app-max-width-large": { max: "1600px" },
+      "app-min-width-extra-small": { min: "479px" },
+      "app-min-width-small": { min: "768px" },
+      "app-min-width-medium": { min: "1024px" },
+      "app-min-width-large": { min: "1600px" },
     },
     fontFamily: {
       poppins: "'Poppins', sans-serif",
@@ -89,5 +93,5 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
-  },
+  }
 };

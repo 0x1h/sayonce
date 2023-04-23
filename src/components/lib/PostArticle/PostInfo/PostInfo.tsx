@@ -7,7 +7,6 @@ import {
   SPostInfoTitle,
   SUnAuthorizedWarn,
 } from "./SPostInfo.styled";
-import { Image, Tooltip } from "@nextui-org/react";
 import { PostProps } from "@/pages/post/[id]";
 import { PostReactions } from "./PostReactions";
 import { api } from "@/utils/api";
@@ -17,6 +16,8 @@ import { inferRouterOutputs } from "@trpc/server";
 import { AppRouter } from "@/server/api/root";
 import { reactIllustion } from "./utils/reactIllusion";
 import { AUTH_STAGE_ENUM, AuthContext } from "@/contexts/AuthContext";
+import { Tooltip } from "react-tooltip";
+import Image from "next/image";
 
 export type ReactionType =
   inferRouterOutputs<AppRouter>["postReactions"]["reactions"];
@@ -45,7 +46,7 @@ export const PostInfo = ({
 
   const reactHandler = (emoji: string | undefined) => {
     console.log(emoji);
-    
+
     if (!emoji) return;
 
     setReactions((prev) => reactIllustion(emoji, prev));
@@ -74,7 +75,15 @@ export const PostInfo = ({
       <SPostInfoTitle>{title}</SPostInfoTitle>
       <SPostInfoDescription>{description}</SPostInfoDescription>
       <SImageGif>
-        <Image src={gif as string} objectFit="cover" alt="content image" />
+        <Image
+          src={gif as string}
+          style={{
+            objectFit: "cover",
+          }}
+          alt="content image"
+          width={700}
+          height={100}
+        />
       </SImageGif>
       {authStage === AUTH_STAGE_ENUM.UNAUTHORIZED && (
         <SUnAuthorizedWarn>Authorize first to react</SUnAuthorizedWarn>
@@ -86,14 +95,14 @@ export const PostInfo = ({
         onEmojiClick={reactHandler}
         authorized={authStage}
       />
-      <Tooltip
-        color="primary"
-        content={dayjs(createdAt).format("D MMMM, YYYY h:mm A")}
+      <SPostDate
+        dateTime={createdAt?.toString()}
+        data-tooltip-id="post-date-tooltip"
+        data-tooltip-content={dayjs(createdAt).format("D MMMM, YYYY h:mm A")}
       >
-        <SPostDate dateTime={createdAt?.toString()}>
-          Published {dayjs(createdAt).fromNow()}
-        </SPostDate>
-      </Tooltip>
+        Published {dayjs(createdAt).fromNow()}
+      </SPostDate>
+      <Tooltip id="post-date-tooltip" />
     </SPostInfo>
   );
 };

@@ -1,6 +1,7 @@
-import { Button, Modal } from "@nextui-org/react";
 import { SLimitWarnMessage } from "./SLimitWarn.styled";
 import ReactLimit from "@/assets/GoodisReact.png";
+import { Button } from "@/components/shared/Button";
+import { Modal } from "@/components/shared/Modal";
 import Image from "next/image";
 
 type LimitWarnModal = {
@@ -9,13 +10,7 @@ type LimitWarnModal = {
 
 export const LimitWarnModal = ({ onClose }: LimitWarnModal) => {
   return (
-    <Modal
-      onClose={onClose}
-      scroll
-      aria-labelledby="modal-title"
-      open
-      width="500px"
-    >
+    <Modal onClose={onClose} aria-labelledby="modal-title" open width={500}>
       <Modal.Header>
         <Image
           src={ReactLimit}
@@ -29,13 +24,9 @@ export const LimitWarnModal = ({ onClose }: LimitWarnModal) => {
           The maximum number of reactions allowed on a post is 10.
         </SLimitWarnMessage>
       </Modal.Body>
-      <Modal.Footer
-        style={{
-          display: "block",
-        }}
-      >
+      <Modal.Footer>
         <SLimitWarnMessage>
-          <Button color={"primary"} flat onPress={onClose}>
+          <Button flat onClick={onClose}>
             Okay
           </Button>
         </SLimitWarnMessage>

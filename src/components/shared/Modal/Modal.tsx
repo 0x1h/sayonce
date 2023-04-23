@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { ReactNode, useRef } from "react";
+import { CSSProperties, ReactNode, useRef, useState } from "react";
 import { SModal, SModalBody, SModalCard, SModalFooter } from "./SModal.styled";
 import { useClickOutside } from "@/hooks/useClickOutside";
 import { createPortal } from "react-dom";
@@ -17,6 +17,7 @@ export const Modal = ({
   ...props
 }: React.PropsWithChildren<ModalProps>) => {
   const modalRef = useRef<HTMLDivElement>(null);
+  
   useClickOutside(modalRef, () => {
     if (!props.preventClose) props.onClose?.();
   });
@@ -33,14 +34,23 @@ export const Modal = ({
   );
 };
 
-Modal.Header = ({ children }: React.PropsWithChildren) => {
-  return <div>{children}</div>;
+Modal.Header = ({
+  children,
+  style,
+}: React.PropsWithChildren<{ style?: CSSProperties }>) => {
+  return <div style={style}>{children}</div>;
 };
 
-Modal.Body = ({ children }: React.PropsWithChildren) => {
-  return <SModalBody>{children}</SModalBody>;
+Modal.Body = ({
+  children,
+  style,
+}: React.PropsWithChildren<{ style?: CSSProperties }>) => {
+  return <SModalBody style={style}>{children}</SModalBody>;
 };
 
-Modal.Footer = ({ children }: React.PropsWithChildren) => {
-  return <SModalFooter>{children}</SModalFooter>;
+Modal.Footer = ({
+  children,
+  style,
+}: React.PropsWithChildren<{ style?: CSSProperties }>) => {
+  return <SModalFooter style={style}>{children}</SModalFooter>;
 };

@@ -1,5 +1,4 @@
 import { type ChangeEvent, useState } from "react";
-import { Loading, Text, type FormElement } from "@nextui-org/react";
 import Twemoji from "react-twemoji";
 import {
   SGifEmojiContainer,
@@ -32,7 +31,7 @@ export const GifModal = ({
         <Input
           autoFocus
           onChange={debounce(
-            (e: ChangeEvent<FormElement>) => setSearch(e.target.value),
+            (e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value),
             500
           )}
           bordered
@@ -44,7 +43,7 @@ export const GifModal = ({
         {data?.gifs?.results?.length === 0 && !data?.gifs?.error && (
           <SGifEmojiContainer>
             <Twemoji>😶‍🌫️</Twemoji>
-            <Text b>Ummm... Nothing found lol</Text>
+            <p>Ummm... Nothing found lol</p>
           </SGifEmojiContainer>
         )}
         {data?.gifs?.error && (

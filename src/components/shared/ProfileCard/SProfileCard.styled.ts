@@ -27,7 +27,7 @@ export const SProfileInfoName = styled.h3`
 `;
 
 export const SProfileDate = styled.time`
-  ${tw``}
+  ${tw`flex whitespace-nowrap gap-x-1`}
 `;
 
 export const SProfileDateWrapper = styled.div`
