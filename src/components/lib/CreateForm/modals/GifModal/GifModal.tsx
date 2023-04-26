@@ -1,16 +1,15 @@
 import { type ChangeEvent, useState } from "react";
-import {
-  Modal,
-  Input,
-  Loading,
-  Text,
-  type FormElement,
-} from "@nextui-org/react";
 import Twemoji from "react-twemoji";
-import { SGifEmojiContainer, GSGridContainer } from "./SGifEmoji.styled";
+import {
+  SGifEmojiContainer,
+  GSGridContainer,
+  SGifText,
+} from "./SGifEmoji.styled";
 import debounce from "lodash/debounce";
 import { api } from "@/utils/api";
 import { GifCard } from "@/components/shared/GifCard/GifCard";
+import { Modal } from "@/components/shared/Modal";
+import { Input } from "@/components/shared/Input";
 
 type GifModalProps = {
   openModal: boolean;
@@ -27,26 +26,16 @@ export const GifModal = ({
   const { data, isLoading } = api.gif.useQuery({ search });
 
   return (
-    <Modal
-      blur
-      scroll
-      aria-labelledby="modal-title"
-      open={openModal}
-      onClose={() => setOpenModal()}
-      width="700px"
-    >
+    <Modal blur open={openModal} onClose={() => setOpenModal()} width={700}>
       <Modal.Header>
         <Input
-          aria-labelledby="input"
-          width="100%"
           autoFocus
           onChange={debounce(
-            (e: ChangeEvent<FormElement>) => setSearch(e.target.value),
+            (e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value),
             500
           )}
-          size="lg"
           bordered
-          contentRight={isLoading && <Loading size="xs" color="white" />}
+          loading={isLoading}
           placeholder="Search"
         />
       </Modal.Header>
@@ -54,15 +43,15 @@ export const GifModal = ({
         {data?.gifs?.results?.length === 0 && !data?.gifs?.error && (
           <SGifEmojiContainer>
             <Twemoji>😶‍🌫️</Twemoji>
-            <Text b>Ummm... Nothing found lol</Text>
+            <p>Ummm... Nothing found lol</p>
           </SGifEmojiContainer>
         )}
         {data?.gifs?.error && (
           <SGifEmojiContainer>
             <Twemoji>🧐</Twemoji>
-            <Text b>
-            Fun Fact: If you would put some words in search would be great
-            </Text>
+            <SGifText>
+              Fun Fact: If you would put some words in search would be great
+            </SGifText>
           </SGifEmojiContainer>
         )}
         <GSGridContainer>

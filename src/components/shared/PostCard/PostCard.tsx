@@ -1,7 +1,8 @@
-import { Avatar, Card, Loading, Row } from "@nextui-org/react";
 import Image from "next/image";
-import { SPostCard, SText } from "./PostCard.styled";
+import { SCard, SFooter, SPostCard, SText } from "./PostCard.styled";
 import { useState } from "react";
+import { Loading } from "../Loading";
+import { Avatar } from "../Avatar";
 
 export type PostCard = {
   img?: string;
@@ -14,49 +15,49 @@ export type PostCard = {
 export const PostCard = ({
   title,
   img,
-  username,
   avatar,
+  username,
   onPress,
 }: PostCard) => {
   const [isPressed, setIsPressed] = useState(false);
 
   return (
-    <Card
-      isPressable
-      onPress={() => {
+    <SCard
+      onClick={() => {
         onPress?.();
         setIsPressed(true);
       }}
+      onKeyUpCapture={(e) => {
+        if (e.key === "Enter") {
+          onPress?.();
+          setIsPressed(true);
+        }
+      }}
     >
-      <Card.Body css={{ p: 0 }}>
-        <SPostCard>
-          <Image
-            src={img as string}
-            style={{
-              objectFit: "cover",
-            }}
-            width={500}
-            height={300}
-            alt={title}
-            loading="lazy"
+      <SPostCard>
+        <Image
+          src={img as string}
+          style={{
+            objectFit: "cover",
+          }}
+          width={500}
+          height={300}
+          alt={title}
+          loading="lazy"
+        />
+      </SPostCard>
+      <SFooter>
+        <SText>{title}</SText>
+        {!isPressed ? (
+          <Avatar
+            src={avatar}
+            alt={username || ""}
+            lazy
           />
-        </SPostCard>
-      </Card.Body>
-      <Card.Footer css={{ justifyItems: "flex-start" }}>
-        <Row justify="space-between" align="center">
-          <SText b>{title}</SText>
-          {!isPressed ? (
-            <Avatar
-              color="primary"
-              bordered
-              src={avatar}
-              alt={username || ""}
-            />
-          ) : (
-            <Loading size="md" />
-          )}
-        </Row>
-      </Card.Footer>
-    </Card>
+        ) : (
+          <Loading />
+        )}
+      </SFooter>
+    </SCard>
   );
 };

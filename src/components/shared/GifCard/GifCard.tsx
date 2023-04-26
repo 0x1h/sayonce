@@ -1,24 +1,36 @@
-import { Card } from "@nextui-org/react";
+import Image from "next/image";
+import { Card, CardImage } from "./SGifCard.styled";
 
 export type GifCardProps = {
   img: string;
   title: string;
-  onClick?: (img: string) => void
+  onClick?: (img: string) => void;
 };
 
 export const GifCard = ({ img, title, onClick }: GifCardProps) => {
   return (
     <Card
+      role="button"
+      onKeyUpCapture={(e) => {
+        if (e.key === "Enter") onClick?.(img)
+      }}
       onClick={() => onClick?.(img)}
-      isPressable
+      tabIndex={0}
     >
-      <Card.Image
-        src={img}
-        objectFit="cover"
-        width={'100%'}
-        alt={title}
-        height={'100%'}
-      />
+      <CardImage>
+        <Image
+          src={img}
+          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAoHBwgHBgoICAgLCgoLDhgQDg0NDh0VFhEYIx8lJCIfIiEmKzcvJik0KSEiMEExNDk7Pj4+JS5ESUM8SDc9Pjv/2wBDAQoLCw4NDhwQEBw7KCIoOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozv/wAARCAC0ALQDAREAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAH/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCLVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH//2Q=="
+          placeholder="blur"
+          style={{
+            objectFit: "cover",
+          }}
+          alt={title}
+          width={500}
+          height={500}
+          loading="lazy"
+        />
+      </CardImage>
     </Card>
   );
 };

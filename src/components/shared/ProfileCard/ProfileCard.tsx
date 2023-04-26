@@ -7,9 +7,10 @@ import {
   SProfileInfo,
   SProfileInfoName,
 } from "./SProfileCard.styled";
-import { Image, Tooltip } from "@nextui-org/react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import Image from "next/image";
+import { Tooltip } from "react-tooltip";
 dayjs.extend(relativeTime);
 
 export const ProfileCard = ({ author }: PostProps["post"]) => {
@@ -20,20 +21,23 @@ export const ProfileCard = ({ author }: PostProps["post"]) => {
           objectFit="cover"
           alt="profile picture"
           src={author?.avatar as string}
+          width={100}
+          height={100}
         />
       </SProfileAvatar>
       <SProfileInfo>
         <SProfileInfoName>{author?.username}</SProfileInfoName>
         <SProfileDateWrapper>
-          <p>Joined</p>
-          <Tooltip
-            color={"primary"}
-            content={dayjs(author?.joinedAt).format("D MMMM, YYYY h:mm A")}
-          >
-            <SProfileDate>{dayjs(author?.joinedAt).fromNow()}</SProfileDate>
-          </Tooltip>
+          <SProfileDate data-tooltip-id="joined-tooltip">
+            <p>Joined</p>
+            {dayjs(author?.joinedAt).fromNow()}
+          </SProfileDate>
         </SProfileDateWrapper>
       </SProfileInfo>
+      <Tooltip
+        content={dayjs(author?.joinedAt).format("D MMMM, YYYY h:mm A")}
+        id="joined-tooltip"
+      />
     </SProfileCard>
   );
 };

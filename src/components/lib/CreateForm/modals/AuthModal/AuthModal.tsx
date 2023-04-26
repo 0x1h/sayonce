@@ -1,4 +1,3 @@
-import { Button, Image, Modal } from "@nextui-org/react";
 import {
   SAuthButtonWrapper,
   SConfirmButtonsWrapper,
@@ -9,6 +8,9 @@ import {
 import { FaDiscord } from "react-icons/fa";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
+import { Modal } from "@/components/shared/Modal";
+import Image from "next/image";
+import { Button } from "@/components/shared/Button";
 
 export const AuthModal = () => {
   const router = useRouter();
@@ -16,16 +18,14 @@ export const AuthModal = () => {
   return (
     <Modal
       blur
-      scroll
       preventClose
       aria-labelledby="modal-title"
       open
-      closeButton
-      onCloseButtonClick={() => {
+      onClose={() => {
         // eslint-disable-next-line
         router.push("/");
       }}
-      width="500px"
+      width={500}
     >
       <Modal.Header>
         <SConfirmWrapper>
@@ -42,14 +42,15 @@ export const AuthModal = () => {
           }
           alt="confirm image"
           style={{ borderRadius: "10px" }}
-          width={"400px"}
+          width={400}
+          height={400}
         />
       </Modal.Body>
       <Modal.Footer>
         <SConfirmButtonsWrapper>
           <Button
             flat
-            onPress={() => {
+            onClick={() => {
               // eslint-disable-next-line
               signIn("discord");
             }}

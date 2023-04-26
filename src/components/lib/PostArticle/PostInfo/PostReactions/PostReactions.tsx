@@ -1,10 +1,13 @@
 import { AddEmoji } from "@/assets/AddEmoji";
 import { Reaction } from "./Reaction";
 import { SAddReaction, SPostReactions } from "./SPostReactions.styled";
-import { Loading, Popover, Tooltip } from "@nextui-org/react";
 import EmojiPicker from "@emoji-mart/react";
 import { RouterOutput } from "@/pages/post/[id]";
 import { AUTH_STAGE_ENUM } from "@/contexts/AuthContext";
+import { Tooltip } from "react-tooltip";
+import { Loading } from "@/components/shared/Loading";
+import { Popover } from "react-tiny-popover";
+import { useState } from "react";
 
 export type PostReactionsProps = {
   postId: number;
@@ -20,6 +23,8 @@ export const PostReactions = ({
   authorized,
   onEmojiClick,
 }: PostReactionsProps) => {
+  const [openPopover, setOpenPopover] = useState(false)
+
   return (
     <SPostReactions>
       {reactions?.map((reaction) => (
@@ -38,25 +43,26 @@ export const PostReactions = ({
       ))}
       {isLoading && <Loading size="xs" />}
       {authorized === AUTH_STAGE_ENUM.AUTHORIZED && (
-        <Tooltip color={"primary"} content="Add Reaction">
-          <Popover placement="top" shouldCloseOnBlur>
-            <Popover.Trigger>
-              <SAddReaction>
-                <AddEmoji />
-              </SAddReaction>
-            </Popover.Trigger>
-            <Popover.Content>
-              <EmojiPicker
-                set={"twitter"}
-                previewPosition={"none"}
-                onEmojiSelect={(e: { native: string }) => {
-                  onEmojiClick?.(e.native);
-                }}
-              />
-            </Popover.Content>
-          </Popover>
-        </Tooltip>
+        <Popover
+          isOpen={openPopover}
+          onClickOutside={() => setOpenPopover(false)}
+          positions={["top", "right"]}
+          content={
+            <EmojiPicker
+              set={"twitter"}
+              previewPosition={"none"}
+              onEmojiSelect={(e: { native: string }) => {
+                onEmojiClick?.(e.native);
+              }}
+            />
+          }
+        >
+          <SAddReaction data-tooltip-id="react-tooltip" onClick={() => setOpenPopover(true)}>
+            <AddEmoji />
+          </SAddReaction>
+        </Popover>
       )}
+      <Tooltip content="Add Reaction" id="react-tooltip" />
     </SPostReactions>
   );
 };

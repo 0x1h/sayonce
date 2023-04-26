@@ -11,15 +11,34 @@ export const SCreateForm = styled.form`
   }
 `;
 
+export const SText = styled.p<{
+  errorMessage?: boolean;
+  b?: boolean;
+  huge?: boolean;
+}>`
+  ${tw`text-xs`}
+  ${(props) => {
+    if (props.errorMessage) {
+      return css`
+        ${tw`text-[#f4256d]`}
+      `;
+    }
+    if (props.b) {
+      return css`
+        ${tw`font-extrabold!`}
+      `;
+    }
+  }}
+`;
+
 export const SCreateWrapper = styled.div`
-  ${tw`max-w-3xl mx-auto`}
+  ${tw`max-w-3xl mx-auto flex flex-col gap-y-6`}
   .nextui-input-main-container {
     ${tw`mt-3`}
   }
 `;
 
 export const SCardWrapper = styled.div<{ error?: boolean }>`
-  ${tw`mt-8`}
   button {
     ${tw`w-full`};
   }
@@ -45,5 +64,24 @@ export const STextCenter = styled.div`
 `;
 
 export const SLoadingScreen = styled.div`
-  ${tw`h-[calc(100vh - 80px)] flex justify-center text-center flex-col gap-y-3`}
+  ${tw`h-[calc(100vh - 80px)] flex justify-center items-center text-center flex-col gap-y-3`}
 `;
+
+export const SGifCard = styled.div<{ errorMessage?: boolean }>`
+  ${tw`bg-ragoon rounded-2xl transition-all active:scale-95 grid place-content-center`}
+  img {
+    ${tw`rounded-xl`}
+  }
+  ${(props) => {
+    if (props.errorMessage) {
+      return css`
+        ${tw`bg-[#300313]! text-[#f4256d]`}
+      `;
+    }
+  }}
+`;
+
+
+SGifCard.defaultProps = {
+  tabIndex: 0
+}

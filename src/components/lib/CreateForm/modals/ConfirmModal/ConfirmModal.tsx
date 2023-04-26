@@ -1,14 +1,19 @@
-import { Button, Image, Loading, Modal } from "@nextui-org/react";
 import {
+  SCenter,
   SConfirmButtonsWrapper,
   SConfirmText,
   SConfirmTitle,
   SConfirmWrapper,
+  SLoadingSubmit,
 } from "./SConfirmModal.styled";
 import { api } from "@/utils/api";
 import { values } from "../../template";
 import { useContext } from "react";
 import { AuthContext } from "@/contexts/AuthContext";
+import { Modal } from "@/components/shared/Modal";
+import { Loading } from "@/components/shared/Loading";
+import Image from "next/image";
+import { Button } from "@/components/shared/Button";
 
 type GifModalProps = {
   openModal: boolean;
@@ -43,19 +48,12 @@ export const ConfirmModal = ({
   };
 
   return (
-    <Modal
-      blur
-      scroll
-      aria-labelledby="modal-title"
-      open={openModal}
-      onClose={() => setOpenModal()}
-      width="500px"
-    >
+    <Modal blur open={openModal} onClose={() => setOpenModal()} width={500}>
       {createPost.isLoading ? (
-        <>
-          <Loading color={"white"} />
-          please wait
-        </>
+        <SLoadingSubmit>
+          <Loading size="xl" color={"white"} />
+          <p>Please wait</p>
+        </SLoadingSubmit>
       ) : (
         <>
           <Modal.Header>
@@ -68,21 +66,36 @@ export const ConfirmModal = ({
             </SConfirmWrapper>
           </Modal.Header>
           <Modal.Body>
-            <Image
-              src={
-                "https://media.tenor.com/XQ0mT-V1n30AAAAC/are-you-sure-about-that-the-rock.gif"
-              }
-              alt="confirm image"
-              style={{ borderRadius: "10px" }}
-              width={"400px"}
-            />
+            <SCenter>
+              <Image
+                src={
+                  "https://media.tenor.com/XQ0mT-V1n30AAAAC/are-you-sure-about-that-the-rock.gif"
+                }
+                alt="confirm image"
+                style={{ borderRadius: "10px" }}
+                width={400}
+                height={400}
+              />
+            </SCenter>
           </Modal.Body>
           <Modal.Footer>
             <SConfirmButtonsWrapper>
-              <Button flat color="error" onPress={setOpenModal}>
+              <Button
+                onClick={setOpenModal}
+                style={{
+                  background: "#300313",
+                  color: "#f4256d",
+                }}
+              >
                 Nahh 💀
               </Button>
-              <Button flat color="success" onPress={submitPostCreate}>
+              <Button
+                style={{
+                  background: "#224124",
+                  color: "#59ff64",
+                }}
+                onClick={submitPostCreate}
+              >
                 Yass 😍
               </Button>
             </SConfirmButtonsWrapper>

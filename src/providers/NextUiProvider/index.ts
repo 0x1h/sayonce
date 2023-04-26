@@ -1,1 +1,0 @@
-export { NextUi } from "./NextUiProvider";

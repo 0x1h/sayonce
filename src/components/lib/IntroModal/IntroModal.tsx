@@ -1,5 +1,4 @@
 import { GlobalModalsContext } from "@/contexts/GlobalModalsContext";
-import { Button, Checkbox, Modal, Spacer, Text } from "@nextui-org/react";
 import { useContext } from "react";
 import { useIntroModal } from "./hooks/useIntroModal";
 import {
@@ -9,6 +8,10 @@ import {
   SIntroModalImage,
   SintroModalP,
 } from "./SIntroModal.styled";
+import { Modal } from "@/components/shared/Modal";
+import { Button } from "@/components/shared/Button";
+import { Spacer } from "@/components/shared/Spacer";
+import { Checkbox } from "@/components/shared/Checkbox";
 
 export const IntroModal = () => {
   const { introModalOpen } = useContext(GlobalModalsContext);
@@ -20,19 +23,16 @@ export const IntroModal = () => {
       blur
       aria-labelledby="modal-title"
       open={introModalOpen}
-      scroll
-      width="800px"
+      width={800}
     >
       <Modal.Header>
-        <Text id="modal-title" size={18}>
+        <div className="flex items-center justify-center">
           Welcome on
-          <Text b size={18} style={{ paddingLeft: "8px" }}>
-            Sayonce 💅🏼🙄
-          </Text>
-        </Text>
+          <div className="pl-2">Sayonce 💅🏼🙄</div>
+        </div>
       </Modal.Header>
-      <Modal.Body id="modal-body-ref">
-        <Text>
+      <Modal.Body>
+        <div>
           <SIntroModalH1>Hey 👋🏻</SIntroModalH1>
           <SintroModalH4>
             before moving forward you must know what happens here, because I do
@@ -70,28 +70,26 @@ export const IntroModal = () => {
             If you have read all of this information and are ready to take a
             risk and try out this platform, please click the checkbox below.
           </SintroModalH4>
-          <Spacer />
           <SIntroImageWrapper>
             <SIntroModalImage
               alt={"pointing gun"}
               style={{
-                objectFit: 'cover'
+                objectFit: "cover",
               }}
               src={
                 "https://i.kym-cdn.com/photos/images/newsfeed/002/337/829/005.gif"
               }
             />
           </SIntroImageWrapper>
-        </Text>
-        <div>
-          <Checkbox onChange={() => setAgreed((prev) => !prev)}>
-            <Text size={14}>Okay, okay got it 😭</Text>
-          </Checkbox>
-          {earlyClose && <Text size={14}>👆 Hey kiddo you forgot this</Text>}
         </div>
+        <div className="mt-3 flex items-center gap-x-2">
+          <Checkbox onClick={() => setAgreed((prev) => !prev)} />
+          <div>Okay, okay got it 😭</div>
+        </div>
+        {earlyClose && <p className="text-xs">👆 Hey kiddo you forgot this</p>}
       </Modal.Body>
       <Modal.Footer>
-        <Button onPress={closeHandler}>Leave me alone</Button>
+        <Button style={{fontSize: '18px'}} onClick={closeHandler}>Leave me alone</Button>
       </Modal.Footer>
     </Modal>
   );

@@ -5,6 +5,10 @@ export const SLoadingCenter = styled.div`
   ${tw`flex items-center justify-center flex-col gap-y-3 h-[calc(100vh - 80px)]`}
 `;
 
+export const SGridContainer = styled.div`
+  ${tw`grid grid-cols-1 app-min-width-medium:grid-cols-2 app-min-width-large:grid-cols-4 gap-4`}
+`;
+
 export const SWaves = styled.div`
   ${tw`w-full overflow-hidden relative`}
   svg {

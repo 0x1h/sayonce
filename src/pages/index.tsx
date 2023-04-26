@@ -9,16 +9,8 @@ const Home: NextPage = () => {
     <>
       <Head>
         <title>Sayonce</title>
-        <meta
-          property="description"
-          content="Post only once what ever you want"
-        />
-        <meta property="title" content="Sayonce" />
-        <meta
-          property="description"
-          content="Post only once what ever you want"
-        />
-        <meta property="title" content="Sayonce" />
+        <meta name="description" content="Post only once what ever you want" />
+        <meta name="title" content="Sayonce" />
         <meta name="theme-color" content="#0070f1" />
       </Head>
       <PostGrid />

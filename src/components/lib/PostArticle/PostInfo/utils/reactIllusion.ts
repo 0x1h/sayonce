@@ -16,7 +16,7 @@ export const reactIllustion = (emoji: string, reactionData: ReactionType): React
       }
 
       return reaction;
-    });
+    }).filter(reaction => reaction.totalReactions > 0)
   }
 
   const addNewEmoji: ReactionType[number] = {

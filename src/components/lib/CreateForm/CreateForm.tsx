@@ -1,22 +1,15 @@
 import { PaddedWrapper } from "@/components/shared/PaddedWrapper";
-import {
-  Button,
-  Card,
-  FormElement,
-  Image,
-  Input,
-  Loading,
-  Text,
-  Textarea,
-} from "@nextui-org/react";
+import { Button } from "@/components/shared/Button";
 import {
   SCreateWrapper,
   SCreateForm,
   SCardWrapper,
   STextCenter,
   SLoadingScreen,
+  SText,
+  SGifCard,
 } from "./SCreateForm.styled";
-import { EmojiSpam } from "@/components/shared/EmojiSpam/EmojiSpam";
+import { EmojiSpam } from "@/components/shared/EmojiSpam";
 import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
 import { GifModal } from "./modals/GifModal/GifModal";
 import { values } from "./template";
@@ -27,6 +20,11 @@ import { AUTH_STAGE_ENUM, AuthContext } from "@/contexts/AuthContext";
 import { SuccessModal } from "./modals/SuccessModal";
 import { api } from "@/utils/api";
 import { PostCooldownModal } from "./modals/PostCooldownModal";
+import { Input } from "@/components/shared/Input";
+import { Textarea } from "@/components/shared/Textarea";
+import { errorMessage } from "./utils/errorMessage.utils";
+import Image from "next/image";
+import { Loading } from "@/components/shared/Loading";
 
 export const CreateForm = () => {
   const [formValues, setFormValues] = useState(values);
@@ -51,7 +49,9 @@ export const CreateForm = () => {
     document.body.style.overflow = "visible";
   }, [openConfirmModal, openModal]);
 
-  const inputHandler = (e: ChangeEvent<FormElement>) => {
+  const inputHandler = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { value, name } = e.target;
 
     setFormValues((prev) => ({ ...prev, [name]: value }));
@@ -106,60 +106,75 @@ export const CreateForm = () => {
       <SCreateForm onSubmit={submitHandler}>
         <SCreateWrapper>
           <Input
-            size="xl"
             label="Title"
             name="title"
             onChange={inputHandler}
-            width="100%"
-            aria-labelledby="search"
-            status={errors.title && submited ? "error" : "default"}
-            helperText={errors.title && submited ? errors.title : ""}
+            errorMessage={errorMessage({
+              text: errors.title as string,
+              submited,
+            })}
           />
           <Textarea
-            size="xl"
-            onChange={inputHandler}
-            name="description"
             label="Description"
-            status={errors.description && submited ? "error" : "default"}
-            width="100%"
             maxLength={500}
-            aria-labelledby="description"
-            helperText={
-              errors.description && submited ? errors.description : ""
-            }
+            name="description"
+            onChange={inputHandler}
+            errorMessage={errorMessage({
+              text: errors.description as string,
+              submited,
+            })}
           />
-          <SCardWrapper error={!!(errors.gif && submited)}>
-            <Text b color={errors.gif && submited ? "error" : undefined}>
+          <SCardWrapper>
+            <SText
+              style={{ fontSize: "1.124rem", marginBottom: "4px" }}
+              errorMessage={
+                !!errorMessage({
+                  text: errors.gif as string,
+                  submited,
+                })
+              }
+              b
+            >
               Gif
-            </Text>
-            <Card
-              onPress={() => setOpenModal(true)}
-              isPressable
+            </SText>
+
+            <SGifCard
+              onKeyUpCapture={(e) => {
+                if (e.key === "Enter") setOpenModal(true);
+              }}
+              errorMessage={
+                !!errorMessage({
+                  text: errors.gif as string,
+                  submited,
+                })
+              }
+              onClick={() => setOpenModal(true)}
               className="gif-card p-8"
-              aria-labelledby="card"
             >
               {formValues?.gif ? (
                 <Image
                   src={formValues.gif}
-                  className="rounded-2xl"
                   alt="content gif"
+                  width={500}
+                  height={500}
+                  style={{
+                    objectFit: "cover",
+                  }}
                 />
               ) : (
                 <>
                   <EmojiSpam />
                   <STextCenter>
-                    <Text size={"$2xl"} b>
+                    <SText style={{ fontSize: "1.2rem" }} b>
                       Search GIF
-                    </Text>
+                    </SText>
                   </STextCenter>
                 </>
               )}
-            </Card>
+            </SGifCard>
           </SCardWrapper>
           <SCardWrapper>
-            <Button flat size="xl" color="success" type="submit">
-              Post ✨
-            </Button>
+            <Button size="xl">Post ✨</Button>
           </SCardWrapper>
         </SCreateWrapper>
       </SCreateForm>

@@ -10,7 +10,7 @@ export const SConfirmText = styled.p`
 `;
 
 export const SConfirmWrapper = styled.div`
-  ${tw`flex flex-col`}
+  ${tw`flex flex-col items-center`}
 `;
 
 export const SConfirmButtonsWrapper = styled.div`

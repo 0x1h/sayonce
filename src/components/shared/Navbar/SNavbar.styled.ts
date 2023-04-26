@@ -1,29 +1,31 @@
-import { Text } from "@nextui-org/react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import tw from "twin.macro";
 
-export const SNavbarLayout = styled.div`
-  .nextui-navbar-container {
-    ${tw`bg-transparent border-0`}
+export const SNavbar = styled.nav<{ justify?: boolean }>`
+  ${tw`bg-black w-full h-24 top-0 left-0 flex items-center relative justify-between z-30`}
+  *:focus {
+    border: none;
   }
-  .nextui-navbar-collapse-wrapper {
-    ${tw`bg-transparent backdrop-blur-0`}
-    &::-webkit-scrollbar {
-      display: none;
+  .hamburger-react{
+    :focus {
+      border: none;
     }
-  }
-  .nextui-navbar-collapse {
-    ${tw`bg-[#000]`}
   }
 `;
 
-export const STextAuthorize = styled(Text)`
-  ${tw`flex items-center`}
-  svg {
-    ${tw`mr-2`}
-  }
-`
+export const SNavbarLi = styled.li<{ active?: boolean }>`
+  ${tw`text-[#535353] list-none`};
+  color: ${(props) => props.active && "#0070f1"};
 
-STextAuthorize.defaultProps = {
-  b: true,
-}
+  :hover {
+    ${tw`underline text-white`}
+    color: ${(props) => props.active && "#0070f1"};
+  }
+`;
+
+export const SNavbarGoShop = styled.span`
+  ${tw`flex items-center`}
+  :hover {
+    ${tw`underline`}
+  }
+`;
