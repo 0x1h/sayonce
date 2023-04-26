@@ -42,7 +42,7 @@ export const PostCard = ({
           }}
           width={500}
           height={300}
-          alt={title}
+          alt={title || "post content"}
           loading="lazy"
         />
       </SPostCard>
