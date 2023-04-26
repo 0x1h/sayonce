@@ -2,6 +2,7 @@ import Image from "next/image";
 import { SCard, SFooter, SPostCard, SText } from "./PostCard.styled";
 import { useState } from "react";
 import { Loading } from "../Loading";
+import { Avatar } from "../Avatar";
 
 export type PostCard = {
   img?: string;
@@ -14,8 +15,8 @@ export type PostCard = {
 export const PostCard = ({
   title,
   img,
-  username,
   avatar,
+  username,
   onPress,
 }: PostCard) => {
   const [isPressed, setIsPressed] = useState(false);
@@ -48,8 +49,11 @@ export const PostCard = ({
       <SFooter>
         <SText>{title}</SText>
         {!isPressed ? (
-          // <Avatar color="primary" bordered src={avatar} alt={username || ""} />
-          <></>
+          <Avatar
+            src={avatar}
+            alt={username || ""}
+            lazy
+          />
         ) : (
           <Loading />
         )}

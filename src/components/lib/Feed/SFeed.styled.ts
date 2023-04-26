@@ -6,8 +6,7 @@ export const SLoadingCenter = styled.div`
 `;
 
 export const SGridContainer = styled.div`
-  ${tw`flex gap-3 mt-6`}
-  flex-flow: wrap;
+  ${tw`grid grid-cols-1 app-min-width-medium:grid-cols-2 app-min-width-large:grid-cols-4 gap-4`}
 `;
 
 export const SWaves = styled.div`

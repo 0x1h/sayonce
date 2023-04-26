@@ -12,12 +12,14 @@ export const LimitWarnModal = ({ onClose }: LimitWarnModal) => {
   return (
     <Modal onClose={onClose} aria-labelledby="modal-title" open width={500}>
       <Modal.Header>
-        <Image
-          src={ReactLimit}
-          alt={"react limit image"}
-          width={200}
-          height={200}
-        />
+        <div className="flex items-center justify-center">
+          <Image
+            src={ReactLimit}
+            alt={"react limit image"}
+            width={200}
+            height={200}
+          />
+        </div>
       </Modal.Header>
       <Modal.Body>
         <SLimitWarnMessage>
@@ -26,7 +28,7 @@ export const LimitWarnModal = ({ onClose }: LimitWarnModal) => {
       </Modal.Body>
       <Modal.Footer>
         <SLimitWarnMessage>
-          <Button flat onClick={onClose}>
+          <Button style={{width: "100%"}} flat onClick={onClose}>
             Okay
           </Button>
         </SLimitWarnMessage>

@@ -10,6 +10,8 @@ import {
 } from "./SIntroModal.styled";
 import { Modal } from "@/components/shared/Modal";
 import { Button } from "@/components/shared/Button";
+import { Spacer } from "@/components/shared/Spacer";
+import { Checkbox } from "@/components/shared/Checkbox";
 
 export const IntroModal = () => {
   const { introModalOpen } = useContext(GlobalModalsContext);
@@ -24,9 +26,9 @@ export const IntroModal = () => {
       width={800}
     >
       <Modal.Header>
-        <div>
+        <div className="flex items-center justify-center">
           Welcome on
-          <div style={{ paddingLeft: "8px" }}>Sayonce 💅🏼🙄</div>
+          <div className="pl-2">Sayonce 💅🏼🙄</div>
         </div>
       </Modal.Header>
       <Modal.Body>
@@ -37,9 +39,11 @@ export const IntroModal = () => {
             lots of dark stuff here that you won&apos;t like i guess, I sell
             your personal data on dark web, okay jk 💀.
           </SintroModalH4>
+          <Spacer />
           <SintroModalH4>
             please take a time and read all these, to understand what this
             platform uses for better experience
+            <Spacer />
             <ul>
               <li>
                 • I use cookies on this website to store user token, which allow
@@ -61,6 +65,7 @@ export const IntroModal = () => {
               </li>
             </ul>
           </SintroModalH4>
+          <Spacer />
           <SintroModalH4>
             If you have read all of this information and are ready to take a
             risk and try out this platform, please click the checkbox below.
@@ -77,17 +82,14 @@ export const IntroModal = () => {
             />
           </SIntroImageWrapper>
         </div>
-        <div>
-          <input
-            type="checkbox"
-            onChange={() => setAgreed((prev) => !prev)}
-          ></input>
+        <div className="mt-3 flex items-center gap-x-2">
+          <Checkbox onClick={() => setAgreed((prev) => !prev)} />
           <div>Okay, okay got it 😭</div>
-          {earlyClose && <div>👆 Hey kiddo you forgot this</div>}
         </div>
+        {earlyClose && <p className="text-xs">👆 Hey kiddo you forgot this</p>}
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={closeHandler}>Leave me alone</Button>
+        <Button style={{fontSize: '18px'}} onClick={closeHandler}>Leave me alone</Button>
       </Modal.Footer>
     </Modal>
   );

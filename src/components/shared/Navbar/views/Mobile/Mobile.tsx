@@ -8,10 +8,20 @@ import { useState } from "react";
 import { useMenu } from "./hooks/useMenu";
 import Link from "next/link";
 import { useWindow } from "@/hooks/useWindow";
+import { useDevice } from "../../hook/useDevice";
+import { Avatar } from "@/components/shared/Avatar";
+import { Session } from "next-auth";
 
-export const Mobile = () => {
+export const Mobile = ({
+  session,
+  onAuthOpen,
+}: {
+  session?: Session;
+  onAuthOpen?: () => void;
+}) => {
   const [open, setOpen] = useState(false);
   const { isWindow } = useWindow();
+  const { isTablet } = useDevice();
   useMenu({ open, setOpen });
 
   if (!isWindow) return null;
@@ -21,8 +31,15 @@ export const Mobile = () => {
       {createPortal(<Menu />, document.body as HTMLDivElement)}
       <PaddedWrapper>
         <SNavbar justify>
-          <Link href="/">Sayonce</Link>
-          <Hamburger />
+          {!isTablet && <Link href="/">Sayonce</Link>}
+          <Hamburger onToggle={() => setOpen((prev) => !prev)} />
+          {isTablet && (
+            <Avatar
+              src={session?.user.image}
+              alt={session?.user.name}
+              onClick={onAuthOpen}
+            />
+          )}
         </SNavbar>
       </PaddedWrapper>
     </NavbarContext.Provider>

@@ -13,7 +13,7 @@ export const Provider = ({
 }: React.PropsWithChildren<ProviderProps>) => {
   return (
     <AuthProvider session={session}>
-      <Navbar />
+      <Navbar session={session} />
       <GlobalModals>{children}</GlobalModals>
     </AuthProvider>
   );

@@ -18,12 +18,11 @@ export const SReaction = styled.span<{ includesMe?: boolean }>`
   }
   .emoji {
     ${tw`w-5`}
-    transform: translateY(2px);
   }
 `;
 
 export const SReationsTotal = styled.p`
-  ${tw``}
+  ${tw`mt-0.5`}
 `;
 
 SReaction.defaultProps = {

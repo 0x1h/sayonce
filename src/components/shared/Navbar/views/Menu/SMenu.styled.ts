@@ -19,10 +19,10 @@ export const SMenuUl = styled.ul`
 
 export const SMenuLi = styled.li<{ active: boolean }>`
   ${tw`text-[#535353] text-xl`};
-  color: ${(props) => props.active && "#0ABAB5"};
+  color: ${(props) => props.active && "#0070f1"};
 
   :hover {
     ${tw`underline text-white`}
-    color: ${(props) => props.active && "#0ABAB5"};
+    color: ${(props) => props.active && "#0070f1"};
   }
 `;

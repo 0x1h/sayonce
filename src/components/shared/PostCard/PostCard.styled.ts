@@ -2,7 +2,7 @@ import styled from "styled-components";
 import tw from "twin.macro";
 
 export const SCard = styled.div`
-  ${tw`bg-ragoon rounded-2xl px-3 py-5 flex app-max-width-extra-small:w-full! w-1/4 flex-col active:scale-95 transition-all`}
+  ${tw`bg-ragoon rounded-2xl px-3 py-5 flex w-full flex-col active:scale-95 transition-all`}
 `;
 
 export const SPostCard = styled.div`

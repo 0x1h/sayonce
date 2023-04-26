@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export const useWindow = () => {
+export const useDevice = () => {
   const [isTablet, setIsTablet] = useState(true);
 
   const handleScreenResize = () => {
