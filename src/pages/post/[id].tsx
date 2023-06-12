@@ -32,7 +32,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   return {
     props: {
-      post,
+      post: JSON.parse(JSON.stringify(post)),
     },
   };
 }

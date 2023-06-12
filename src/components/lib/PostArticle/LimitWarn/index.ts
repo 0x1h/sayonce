@@ -1,1 +1,1 @@
-export { LimitWarnModal } from "./LimitWarn";
+export { LimitWarnModal as default } from "./LimitWarn";

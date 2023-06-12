@@ -11,7 +11,8 @@ import { PostProps } from "@/pages/post/[id]";
 import { PostReactions } from "./PostReactions";
 import { RouterOutputs, api } from "@/utils/api";
 import { useContext, useState } from "react";
-import { LimitWarnModal } from "../LimitWarn";
+import dynamic from "next/dynamic";
+const LimitWarnModal = dynamic(() => import("../LimitWarn"));
 import { reactIllustion } from "./utils/reactIllusion";
 import { AUTH_STAGE_ENUM, AuthContext } from "@/contexts/AuthContext";
 import { Tooltip } from "react-tooltip";
@@ -42,8 +43,6 @@ export const PostInfo = ({
   const [reactLimitModal, setReactLimitModal] = useState(false);
 
   const reactHandler = (emoji: string | undefined) => {
-    console.log(emoji);
-
     if (!emoji) return;
 
     setReactions((prev) => reactIllustion(emoji, prev));
