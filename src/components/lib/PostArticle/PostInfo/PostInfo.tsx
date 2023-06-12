@@ -9,18 +9,15 @@ import {
 } from "./SPostInfo.styled";
 import { PostProps } from "@/pages/post/[id]";
 import { PostReactions } from "./PostReactions";
-import { api } from "@/utils/api";
+import { RouterOutputs, api } from "@/utils/api";
 import { useContext, useState } from "react";
 import { LimitWarnModal } from "../LimitWarn";
-import { inferRouterOutputs } from "@trpc/server";
-import { AppRouter } from "@/server/api/root";
 import { reactIllustion } from "./utils/reactIllusion";
 import { AUTH_STAGE_ENUM, AuthContext } from "@/contexts/AuthContext";
 import { Tooltip } from "react-tooltip";
 import Image from "next/image";
 
-export type ReactionType =
-  inferRouterOutputs<AppRouter>["postReactions"]["reactions"];
+export type ReactionType = RouterOutputs["postReactions"]["reactions"];
 
 export const PostInfo = ({
   createdAt,
@@ -57,7 +54,6 @@ export const PostInfo = ({
       },
       {
         onSuccess: () => {
-          // eslint-disable-next-line
           refetch();
         },
         onError: () => {

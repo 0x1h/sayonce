@@ -1,18 +1,19 @@
 import { AddEmoji } from "@/assets/AddEmoji";
-import { Reaction } from "./Reaction";
+import dynamic from "next/dynamic";
+const Reaction = dynamic(() => import("./Reaction"));
+const EmojiPicker = dynamic(() => import("@emoji-mart/react"));
 import { SAddReaction, SPostReactions } from "./SPostReactions.styled";
-import EmojiPicker from "@emoji-mart/react";
-import { RouterOutput } from "@/pages/post/[id]";
 import { AUTH_STAGE_ENUM } from "@/contexts/AuthContext";
 import { Tooltip } from "react-tooltip";
 import { Loading } from "@/components/shared/Loading";
 import { Popover } from "react-tiny-popover";
 import { useState } from "react";
+import { RouterOutputs } from "@/utils/api";
 
 export type PostReactionsProps = {
   postId: number;
   onEmojiClick: (emoji: string | undefined) => void;
-  reactions: RouterOutput["postReactions"]["reactions"];
+  reactions: RouterOutputs["postReactions"]["reactions"];
   isLoading: boolean;
   authorized: AUTH_STAGE_ENUM;
 };
@@ -23,7 +24,7 @@ export const PostReactions = ({
   authorized,
   onEmojiClick,
 }: PostReactionsProps) => {
-  const [openPopover, setOpenPopover] = useState(false)
+  const [openPopover, setOpenPopover] = useState(false);
 
   return (
     <SPostReactions>
@@ -57,7 +58,10 @@ export const PostReactions = ({
             />
           }
         >
-          <SAddReaction data-tooltip-id="react-tooltip" onClick={() => setOpenPopover(true)}>
+          <SAddReaction
+            data-tooltip-id="react-tooltip"
+            onClick={() => setOpenPopover(true)}
+          >
             <AddEmoji />
           </SAddReaction>
         </Popover>

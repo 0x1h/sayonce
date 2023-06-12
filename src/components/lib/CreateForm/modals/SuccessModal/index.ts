@@ -1,1 +1,1 @@
-export { SuccessModal } from "./SuccessModal";
+export { SuccessModal as default} from "./SuccessModal";

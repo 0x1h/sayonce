@@ -1,1 +1,1 @@
-export { PostCooldownModal } from "./PostCooldownModal";
+export { PostCooldownModal as default} from "./PostCooldownModal";

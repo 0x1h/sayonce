@@ -1,17 +1,11 @@
 import type { GetServerSidePropsContext, NextPage } from "next";
-import { authOptions } from "@/server/api/auth";
-import { getServerSession } from "next-auth/next";
 import Head from "next/head";
 import { Article } from "@/components/app/Article";
-import { createServerSideHelpers } from "@trpc/react-query/server";
-import type { inferRouterOutputs } from "@trpc/server";
-import { AppRouter, appRouter } from "@/server/api/root";
 import { prisma } from "@/server/db";
-
-export type RouterOutput = inferRouterOutputs<AppRouter>;
+import { RouterOutputs } from "@/utils/api";
 
 export type PostProps = {
-  post: RouterOutput["postById"]["post"];
+  post: RouterOutputs["postById"]["post"];
 };
 
 export const PostPage: NextPage<PostProps> = ({ post }) => {
@@ -30,28 +24,15 @@ export const PostPage: NextPage<PostProps> = ({ post }) => {
 };
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const session = await getServerSession(context.req, context.res, authOptions);
-  const id = context.params?.id;
-
-  const ssg = createServerSideHelpers({
-    router: appRouter,
-    ctx: {
-      prisma: prisma,
-      session: session,
-      id: session?.user.id,
+  const post = await prisma.post.findFirst({
+    where: {
+      id: Number(context.query.id),
     },
-  });
-
-  const { post } = await ssg.postById.fetch({
-    id: Number(id),
   });
 
   return {
     props: {
-      session,
-      post: JSON.parse(
-        JSON.stringify(post)
-      ) as RouterOutput["postById"]["post"],
+      post,
     },
   };
 }

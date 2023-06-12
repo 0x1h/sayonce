@@ -11,15 +11,16 @@ import {
 } from "./SCreateForm.styled";
 import { EmojiSpam } from "@/components/shared/EmojiSpam";
 import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
-import { GifModal } from "./modals/GifModal/GifModal";
+import { GifModal } from "./modals/GifModal";
 import { values } from "./template";
 import { useValidate } from "./hooks/useValidate";
 import { ConfirmModal } from "./modals/ConfirmModal";
-import { AuthModal } from "./modals/AuthModal";
+import dynamic from "next/dynamic";
+const AuthModal = dynamic(() => import('./modals/AuthModal'))
 import { AUTH_STAGE_ENUM, AuthContext } from "@/contexts/AuthContext";
-import { SuccessModal } from "./modals/SuccessModal";
+const SuccessModal = dynamic(() => import('./modals/SuccessModal'))
 import { api } from "@/utils/api";
-import { PostCooldownModal } from "./modals/PostCooldownModal";
+const PostCooldownModal = dynamic(() => import('./modals/PostCooldownModal'))
 import { Input } from "@/components/shared/Input";
 import { Textarea } from "@/components/shared/Textarea";
 import { errorMessage } from "./utils/errorMessage.utils";
