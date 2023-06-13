@@ -22,5 +22,5 @@ export const SFooter = styled.footer`
 `;
 
 SCard.defaultProps = {
-  tabIndex: 1,
+  tabIndex: 0,
 };

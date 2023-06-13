@@ -44,6 +44,7 @@ export const PostCard = ({
           height={300}
           alt={title || "post content"}
           loading="lazy"
+          quality={1}
         />
       </SPostCard>
       <SFooter>

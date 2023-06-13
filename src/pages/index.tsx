@@ -18,14 +18,4 @@ const Home: NextPage = () => {
   );
 };
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const session = await getServerSession(context.req, context.res, authOptions);
-
-  return {
-    props: {
-      session,
-    },
-  };
-}
-
 export default Home;
