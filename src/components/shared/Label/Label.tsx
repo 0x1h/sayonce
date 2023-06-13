@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import { SLabel } from "./SLabel.styled";
 
 export type LabelProps = React.LabelHTMLAttributes<HTMLLabelElement>;

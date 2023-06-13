@@ -10,7 +10,7 @@ import {
   SGifCard,
 } from "./SCreateForm.styled";
 import { EmojiSpam } from "@/components/shared/EmojiSpam";
-import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
+import { type ChangeEvent, type FormEvent, useContext, useEffect, useState } from "react";
 import { GifModal } from "./modals/GifModal";
 import { values } from "./template";
 import { useValidate } from "./hooks/useValidate";

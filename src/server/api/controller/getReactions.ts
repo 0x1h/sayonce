@@ -1,5 +1,5 @@
-import { prisma as prismaApi } from "@/server/db";
-import { Post, PostReaction, User } from "@prisma/client";
+import type { prisma as prismaApi } from "@/server/db";
+import type { PostReaction } from "@prisma/client";
 
 export const getReactions = async (
   prisma: typeof prismaApi,

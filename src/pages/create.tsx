@@ -1,10 +1,7 @@
-import type { GetServerSidePropsContext, NextPage } from "next";
-import { authOptions } from "@/server/api/auth";
-import { getServerSession } from "next-auth/next";
 import Head from "next/head";
 import { Create } from "@/components/app/Create";
 
-const Home: NextPage = () => {
+const Home = () => {
   return (
     <>
       <Head>

@@ -10,7 +10,7 @@ import Link from "next/link";
 import { useWindow } from "@/hooks/useWindow";
 import { useDevice } from "../../hook/useDevice";
 import { Avatar } from "@/components/shared/Avatar";
-import { Session } from "next-auth";
+import type { Session } from "next-auth";
 
 export const Mobile = ({
   session,

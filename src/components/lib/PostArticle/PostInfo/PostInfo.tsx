@@ -7,9 +7,9 @@ import {
   SPostInfoTitle,
   SUnAuthorizedWarn,
 } from "./SPostInfo.styled";
-import { PostProps } from "@/pages/post/[id]";
+import type { PostProps } from "@/pages/post/[id]";
 import { PostReactions } from "./PostReactions";
-import { RouterOutputs, api } from "@/utils/api";
+import { type RouterOutputs, api } from "@/utils/api";
 import { useContext, useState } from "react";
 import dynamic from "next/dynamic";
 const LimitWarnModal = dynamic(() => import("../LimitWarn"));

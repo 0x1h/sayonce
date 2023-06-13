@@ -7,8 +7,8 @@ import { SGridContainer, SLoadingCenter } from "./SFeed.styled";
 import { NoPosts } from "./NoPosts";
 import { Observer } from "@/components/shared/Observer";
 import { useMemo } from "react";
-import { inferRouterOutputs } from "@trpc/server";
-import { AppRouter } from "@/server/api/root";
+import { type inferRouterOutputs } from "@trpc/server";
+import { type AppRouter } from "@/server/api/root";
 import { PostsEnd } from "./PostsEnd";
 import { Loading } from "@/components/shared/Loading";
 

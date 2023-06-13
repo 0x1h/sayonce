@@ -5,7 +5,6 @@ import { navbarRoutingLinks } from "../../constant/navbarRoutingLinks";
 import { activeRouter } from "../../utils/activeRouter";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Button } from "@/components/shared/Button";
 
 export const Menu = () => {
   const { open, setOpen } = useContext(NavbarContext);

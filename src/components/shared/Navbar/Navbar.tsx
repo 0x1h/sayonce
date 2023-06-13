@@ -1,7 +1,7 @@
 import { Mobile } from "./views/Mobile";
 import { Desktop } from "./views/Desktop";
 import { useDevice } from "./hook/useDevice";
-import { Session } from "next-auth";
+import type { Session } from "next-auth";
 import { AuthModal } from "./views/AuthModal";
 import { useState } from "react";
 import { createPortal } from "react-dom";

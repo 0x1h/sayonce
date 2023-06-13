@@ -10,7 +10,7 @@ export interface TextareaProps
 }
 
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
-  ({ className, ...props }, ref) => {
+  ({ ...props }, ref) => {
     return (
       <STextareaWrapper errorMessage={!!props.errorMessage}>
         {props.label && <Label className="text-lg">{props.label}</Label>}

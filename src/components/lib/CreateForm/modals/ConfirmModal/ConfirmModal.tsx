@@ -7,7 +7,7 @@ import {
   SLoadingSubmit,
 } from "./SConfirmModal.styled";
 import { api } from "@/utils/api";
-import { values } from "../../template";
+import type { values } from "../../template";
 import { useContext } from "react";
 import { AuthContext } from "@/contexts/AuthContext";
 import { Modal } from "@/components/shared/Modal";

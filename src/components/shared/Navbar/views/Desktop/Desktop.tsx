@@ -2,7 +2,7 @@ import { PaddedWrapper } from "@/components/shared/PaddedWrapper";
 import { SNavbar, SNavbarLi } from "../../SNavbar.styled";
 import Link from "next/link";
 import { Avatar } from "@/components/shared/Avatar";
-import { Session } from "next-auth";
+import type { Session } from "next-auth";
 import { navbarRoutingLinks } from "../../constant/navbarRoutingLinks";
 import { activeRouter } from "../../utils/activeRouter";
 import { useRouter } from "next/router";

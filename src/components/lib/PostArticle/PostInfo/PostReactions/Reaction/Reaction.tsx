@@ -1,6 +1,6 @@
 import Twemoji from "react-twemoji";
 import { SReaction, SReationsTotal } from "./SReaction.styled";
-import { PostReactionsProps } from "../PostReactions";
+import type { PostReactionsProps } from "../PostReactions";
 
 type ReactionProps = PostReactionsProps["reactions"][number] & {
   onEmojiClick: (emoji: string) => void;

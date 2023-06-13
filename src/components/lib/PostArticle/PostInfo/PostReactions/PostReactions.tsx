@@ -8,7 +8,7 @@ import { Tooltip } from "react-tooltip";
 import { Loading } from "@/components/shared/Loading";
 import { Popover } from "react-tiny-popover";
 import { useState } from "react";
-import { RouterOutputs } from "@/utils/api";
+import type { RouterOutputs } from "@/utils/api";
 
 export type PostReactionsProps = {
   postId: number;

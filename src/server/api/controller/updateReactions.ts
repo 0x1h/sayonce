@@ -1,4 +1,4 @@
-import { prisma as prismaApi } from "@/server/db";
+import type { prisma as prismaApi } from "@/server/db";
 
 export const checkIfIExistInReactions = async (
   prisma: typeof prismaApi,

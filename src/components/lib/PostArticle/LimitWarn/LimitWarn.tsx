@@ -4,11 +4,11 @@ import { Button } from "@/components/shared/Button";
 import { Modal } from "@/components/shared/Modal";
 import Image from "next/image";
 
-type LimitWarnModal = {
+type LimitWarnModalProps = {
   onClose: () => void;
 };
 
-export const LimitWarnModal = ({ onClose }: LimitWarnModal) => {
+export const LimitWarnModal = ({ onClose }: LimitWarnModalProps) => {
   return (
     <Modal onClose={onClose} aria-labelledby="modal-title" open width={500}>
       <Modal.Header>

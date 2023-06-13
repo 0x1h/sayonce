@@ -1,4 +1,4 @@
-import { ReactionType } from "../PostInfo";
+import type { ReactionType } from "../PostInfo";
 
 export const reactIllustion = (emoji: string, reactionData: ReactionType): ReactionType => {
   const isEmojiIncludes = reactionData.find((react) => react.emoji === emoji);

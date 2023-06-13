@@ -1,4 +1,4 @@
-import { PostProps } from "@/pages/post/[id]";
+import type { PostProps } from "@/pages/post/[id]";
 import {
   SProfileAvatar,
   SProfileCard,

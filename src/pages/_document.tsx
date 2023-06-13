@@ -1,4 +1,4 @@
-import Document, { DocumentContext, DocumentInitialProps } from "next/document";
+import Document, { type DocumentContext, type DocumentInitialProps } from "next/document";
 import { ServerStyleSheet } from "styled-components";
 
 export default class MyDocument extends Document {

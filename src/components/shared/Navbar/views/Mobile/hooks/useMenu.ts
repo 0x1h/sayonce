@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { NavbarContextType } from "../context/NavbarContext";
+import type { NavbarContextType } from "../context/NavbarContext";
 
 export const useMenu = ({ open }: NavbarContextType) => {
   useEffect(() => {

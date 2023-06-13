@@ -12,7 +12,7 @@ export type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
 };
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, ...props }, ref) => {
+  ({ type, ...props }, ref) => {
     return (
       <SInputWrapper errorMessage={!!props.errorMessage}>
         {props.label && <Label className="text-lg">{props.label}</Label>}

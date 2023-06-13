@@ -2,7 +2,7 @@ import type { GetServerSidePropsContext, NextPage } from "next";
 import Head from "next/head";
 import { Article } from "@/components/app/Article";
 import { prisma } from "@/server/db";
-import { RouterOutputs } from "@/utils/api";
+import type { RouterOutputs } from "@/utils/api";
 
 export type PostProps = {
   post: RouterOutputs["postById"]["post"];

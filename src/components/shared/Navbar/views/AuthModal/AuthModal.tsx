@@ -1,7 +1,7 @@
 import { Avatar } from "@/components/shared/Avatar";
 import { Button } from "@/components/shared/Button";
 import { Modal } from "@/components/shared/Modal";
-import { Session } from "next-auth";
+import type { Session } from "next-auth";
 import { signIn, signOut } from "next-auth/react";
 import { FaDiscord } from "react-icons/fa";
 
